@@ -1,0 +1,3 @@
+getMaps():应该能得到完整的地图，但只有WALL,ROAD,START,FINISH
+
+先用getMaps得到不含TRAP的地图, 再用trap检查是否是具体的哪个trap。
