@@ -24,14 +24,21 @@ public class MyAutoController extends CarController {
 	private final int CAR_MAX_SPEED = 1;
 	private Output output;
 	private AnalyseMap analyseMap;
+	private Strategy strategy;
 	
 	public MyAutoController(Car car) {
 		super(car);
+		strategy = new Strategy();
 		output = new Output("record.txt");
-		analyseMap = new AnalyseMap(getMap());
+		analyseMap = new AnalyseMap(getMap(), mapWidth(), mapHeight());
+		String coordinateString = getPosition();
+		int x = Integer.parseInt(coordinateString.split(",")[0]);
+		int y = Integer.parseInt(coordinateString.split(",")[1]);
+		Coordinate co = new Coordinate(x, y);
 		
+		analyseMap.updateCarMap(getView());
 		output.write(analyseMap.getcarMapString());
-		output.endOutput();
+		output.write(analyseMap.getNearestUnupdatedCoordinate(co, getViewSquare()).toString());
 		//output.write(Simulation.toConserve().name());
 		/*
 		HashMap<Coordinate,MapTile> view = getView();
@@ -59,6 +66,5 @@ public class MyAutoController extends CarController {
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-		
 	}
 }

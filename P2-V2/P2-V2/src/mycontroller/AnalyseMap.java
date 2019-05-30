@@ -2,6 +2,8 @@ package mycontroller;
 
 import java.util.HashMap;
 import tiles.MapTile;
+import tiles.MapTile.Type;
+import tiles.TrapTile;
 import utilities.Coordinate;
 
 /**
@@ -11,14 +13,14 @@ import utilities.Coordinate;
  *
  */
 public class AnalyseMap {
-	public static int MAX_X;
-	public static int MIN_X;
-	public static int MAX_Y;
-	public static int MIN_Y;
+	public static int HEIGHT;
+	public static int WIDTH;
 	protected HashMap<Coordinate,DetectTile> carMap;
 	
-	public AnalyseMap(HashMap<Coordinate,MapTile> initialMap) {
+	public AnalyseMap(HashMap<Coordinate,MapTile> initialMap, int width, int height) {
 		carMap = new HashMap<Coordinate,DetectTile>();
+		HEIGHT = height;
+		WIDTH = width;
 		initializeCarMap(initialMap);
 	}
 	
@@ -27,53 +29,82 @@ public class AnalyseMap {
 	 * information of TRAP and get map range
 	 */
 	private void initializeCarMap(HashMap<Coordinate,MapTile> map) {
-		int maxX = 0, minX = 0, maxY = 0, minY = 0;
 		for (Coordinate coordinate : map.keySet()) {
-			if (coordinate.x > maxX) {
-				maxX = coordinate.x;
-			}
-			if (coordinate.x < minX) {
-				minX = coordinate.x;
-			}
-			if (coordinate.y > maxY) {
-				maxY = coordinate.y;
-			}
-			if (coordinate.y < minY) {
-				minY = coordinate.y;
-			}
-			carMap.put(coordinate, new DetectTile(map.get(coordinate)));
+			carMap.put(coordinate, new DetectTile(map.get(coordinate), coordinate.x ,coordinate.y));
 		}
-		
-		// set map range;
-		MAX_X = maxX;
-		MIN_X = minX;
-		MAX_Y = maxY;
-		MIN_Y = minY;
-		System.err.println("x range: " + MIN_X + "-" + MAX_X + ", y range: " + MIN_Y + "-" + MAX_Y);
+		System.err.println("x range: " + WIDTH+ ", y range: " + HEIGHT);
 	}
 	
-	public boolean getDetectTile(Coordinate coordinate, DetectTile tile) {
-		carMap.put(coordinate, tile);
-		return true;
-	}
-	
+
 	/**
 	 * get the string of carmap that already added tile
 	 * @return
 	 */
 	public String getcarMapString() {
 		String ret = "";	
-		for (int x, y = MAX_Y; y >= MIN_Y; y-- ) {
-			for (x = MIN_X; x <= MAX_X; x++ ) {
+		for (int x, y = HEIGHT - 1; y >= 0; y-- ) {
+			for (x = 0; x < WIDTH; x++ ) {
 				Coordinate coordinate = new Coordinate(x, y);
 				DetectTile tile = carMap.get(coordinate);
 				String temp = String.format("%10s", tile.tileType);
 				ret += temp;
-				if (x == MAX_X) {
+				if (x == WIDTH - 1) {
 					ret += "\n";
 				}
 			}
 		}
 		return ret;
+	}
+	
+	public void updateCarMap(HashMap<Coordinate,MapTile> carVisionMap) {
+		for (Coordinate coordinate : carVisionMap.keySet()) {
+			// discard outer tile info
+			if (!carMap.containsKey(coordinate)) {
+				continue;
+			}
+			MapTile mapTile = carVisionMap.get(coordinate);
+			DetectTile tile = carMap.get(coordinate);
+			tile.setIsUpdated(true);
+			// discard tile excluding TRAP
+			if (!mapTile.isType(Type.TRAP)) {
+				continue;
+			}
+			// update tileType of DetectTile in carMap
+			TrapTile trapTile = (TrapTile) mapTile;
+			tile.setTileType(trapTile.getTrap());
+		}
+	}
+	
+	public Coordinate getNearestUnupdatedCoordinate(Coordinate startCoordinate, int visionLength) {
+		int shortestDistance = -1;
+		int x = 0, y = 0;
+		for (Coordinate coordinate : carMap.keySet()) {
+			DetectTile tile = carMap.get(coordinate);
+			if (tile.isUpdated == true) {
+				continue;
+			}
+			if (shortestDistance == -1) {
+				shortestDistance = getDistance(startCoordinate, coordinate);
+				x = coordinate.x;
+				y = coordinate.y;
+			} else {
+				int distance = getDistance(startCoordinate, coordinate);
+				//System.err.println(startCoordinate.toString() + " to " + coordinate.toString() + ":" + distance);
+				if (shortestDistance > distance) {
+					x = coordinate.x;
+					y = coordinate.y;
+					shortestDistance = distance;
+				}
+			}
+		}
+		
+		if (shortestDistance == -1) {
+			return null;
+		}
+		return new Coordinate(x, y);
+	}
+	
+	public int getDistance(Coordinate pointA, Coordinate pointB) {
+		return Math.abs(pointA.x - pointB.x) + Math.abs(pointA.y - pointB.y);
 	}
 }

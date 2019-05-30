@@ -10,7 +10,7 @@
       WALL      ROAD      ROAD      ROAD      ROAD      ROAD      WALL      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      WALL      ROAD      ROAD      ROAD      ROAD      WALL
       WALL      ROAD      ROAD      ROAD      ROAD      ROAD      WALL      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      WALL      ROAD      ROAD      ROAD      ROAD      WALL
       WALL      ROAD      ROAD      ROAD      ROAD      ROAD      WALL      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      WALL      ROAD      ROAD      ROAD      ROAD      WALL
-      WALL    health    health    health    health    health      WALL      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      WALL      ROAD      ROAD      ROAD      ROAD      WALL
+      WALL      ROAD      ROAD      ROAD      ROAD      ROAD      WALL      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      WALL      ROAD      ROAD      ROAD      ROAD      WALL
       WALL      WALL      WALL      WALL      WALL      WALL      WALL      ROAD      ROAD      WALL      WALL      WALL      WALL      WALL      WALL      WALL      WALL      WALL      WALL      WALL      ROAD      ROAD      ROAD      ROAD      WALL
       WALL      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      WALL
       WALL      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      WALL
@@ -18,4 +18,4 @@
       WALL      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      ROAD      WALL
       WALL      WALL      WALL      WALL      WALL      WALL      WALL      WALL      WALL      WALL      WALL      WALL      WALL      WALL      WALL      WALL      WALL      WALL      WALL      WALL      WALL      WALL      WALL      WALL      WALL
       WALL      WALL      WALL      WALL      WALL      WALL      WALL      WALL      WALL      WALL      WALL      WALL      WALL      WALL      WALL      WALL      WALL      WALL      WALL      WALL      WALL      WALL      WALL      WALL      WALL
-2,8
+      

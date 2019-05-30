@@ -1,5 +1,6 @@
 package mycontroller;
 import tiles.MapTile;
+import tiles.MapTile.Type;
 
 /**
  * 
@@ -10,17 +11,19 @@ public class DetectTile {
 	protected MapTile tile;
 	protected int visitedTimes = 0;
 	protected String tileType;
+	protected boolean isUpdated;
+	protected int x;
+	protected int y;
 	
-	public DetectTile(MapTile tile) {
+	public DetectTile(MapTile tile, int x, int y) {
 		this.tile = tile;
 		tileType = tile.getType().name();
-		visitedTimes = 0;
+		isUpdated = false;
+		visitedTimes = 0;	
+		this.x = x;
+		this.y = y;
 	}
 	
-	public DetectTile(MapTile tile, int visitedTimes) {
-		this(tile);
-		this.visitedTimes = visitedTimes;	
-	}
 	
 	public void visitTile() {
 		visitedTimes++;
@@ -28,5 +31,9 @@ public class DetectTile {
 	
 	public void setTileType(String tileType) {
 		this.tileType = tileType;
+	}
+	
+	public void setIsUpdated(boolean status) {
+		isUpdated = status;
 	}
 }

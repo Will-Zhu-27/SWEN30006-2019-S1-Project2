@@ -23,11 +23,12 @@ public class Output {
 				file.createNewFile();
 			}
 
-			// replace the origin content
-			fileWritter = new FileWriter(file.getName(), false);			
+			/** replace the origin content
+			fileWritter = new FileWriter(file.getName(), false);
+			*/			
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.err.println("Error in outputing the result.");
+			System.err.println("Error in opening " + fileName);
 			System.exit(1);
 		}
 	}
@@ -38,7 +39,10 @@ public class Output {
 	 */
 	public void write(String data) {
 		try {
+			// continue write data into file
+			fileWritter = new FileWriter(fileName, true);
 			fileWritter.write(data);
+			fileWritter.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
