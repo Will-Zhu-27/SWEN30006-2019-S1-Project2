@@ -23,9 +23,9 @@ public class Output {
 				file.createNewFile();
 			}
 
-			/** replace the origin content
+			
 			fileWritter = new FileWriter(file.getName(), false);
-			*/			
+			fileWritter.close();			
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.err.println("Error in opening " + fileName);

@@ -2,7 +2,9 @@ package mycontroller;
 
 import java.util.HashMap;
 
+import controller.CarController;
 import utilities.Coordinate;
+import world.WorldSpatial.Direction;
 
 /**
  * Strategy class can give route according to given aim
@@ -25,8 +27,15 @@ public class Strategy {
 		currentAim = aim;
 	}
 	
-	public void getPath(Coordinate carCoordinate, Coordinate destCoordinate) {
+	public Direction getMoveOrientation(AnalyseMap map, CarController controller) {
+		String coordinateString = controller.getPosition();
+		int x = Integer.parseInt(coordinateString.split(",")[0]);
+		int y = Integer.parseInt(coordinateString.split(",")[1]);
+		Coordinate co = new Coordinate(x, y);
+		map.getNearestUnupdatedCoordinate(co, controller.getViewSquare());
+		// to be continue
 		
+		return Direction.EAST;
 	}
 	
 }

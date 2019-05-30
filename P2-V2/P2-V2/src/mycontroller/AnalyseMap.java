@@ -13,14 +13,22 @@ import utilities.Coordinate;
  *
  */
 public class AnalyseMap {
+	public final static int WALL_VALUE = 1;
 	public static int HEIGHT;
 	public static int WIDTH;
 	protected HashMap<Coordinate,DetectTile> carMap;
-	
+	// two-dimensional arry to represent the maze
+	protected int maze[][];
 	public AnalyseMap(HashMap<Coordinate,MapTile> initialMap, int width, int height) {
 		carMap = new HashMap<Coordinate,DetectTile>();
 		HEIGHT = height;
 		WIDTH = width;
+		maze = new int[WIDTH][HEIGHT];
+		for (int i = 0; i < WIDTH; i++) {
+			for (int j = 0; j < HEIGHT; j++) {
+				maze[i][j] = 0;
+			}
+		}
 		initializeCarMap(initialMap);
 	}
 	
@@ -30,9 +38,30 @@ public class AnalyseMap {
 	 */
 	private void initializeCarMap(HashMap<Coordinate,MapTile> map) {
 		for (Coordinate coordinate : map.keySet()) {
+			MapTile mapTile = map.get(coordinate);
+			if (mapTile.getType() == Type.WALL) {
+				maze[coordinate.x][coordinate.y] = WALL_VALUE;
+			}
 			carMap.put(coordinate, new DetectTile(map.get(coordinate), coordinate.x ,coordinate.y));
+			
 		}
 		System.err.println("x range: " + WIDTH+ ", y range: " + HEIGHT);
+	}
+	
+	/**
+	 * return the maze in format of String
+	 */
+	public String getMazeGraphString() {
+		String ret = "";
+		for (int y = HEIGHT - 1; y >= 0; y--) {
+			for (int x = 0; x < WIDTH; x++) {
+				ret += maze[x][y];
+				if (x == WIDTH - 1) {
+					ret += "\n";
+				}
+			}
+		}
+		return ret;
 	}
 	
 
