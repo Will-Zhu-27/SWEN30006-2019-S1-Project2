@@ -13,6 +13,7 @@ import java.util.Set;
 import com.badlogic.gdx.Input;
 
 import tiles.MapTile;
+import tiles.MapTile.Type;
 import utilities.Coordinate;
 import world.WorldSpatial;
 import world.WorldSpatial.Direction;
@@ -28,13 +29,14 @@ public class MyAutoController extends CarController {
 	// Car Speed to move at
 	private final int CAR_MAX_SPEED = 1;
 	private Output output;
-	protected AnalyseMap analyseMap;
+	protected volatile AnalyseMap analyseMap;
 	private Strategy strategy;
 	private AStar findPathAlgorithm;
 	public MyAutoController(Car car) {
 		super(car);
-		strategy = new Strategy(this);
 		output = new Output("record.txt");
+		strategy = new Strategy(this, output);
+		
 		analyseMap = new AnalyseMap(getMap(), mapWidth(), mapHeight());
 		findPathAlgorithm = new AStar(analyseMap.maze);
 		// update Start point view
@@ -42,6 +44,12 @@ public class MyAutoController extends CarController {
 		// get first aim
 		strategy.initializeAim();
 		output.write("Dest: " + strategy.destCoordinate.toString() + "\n");
+		/*
+		Coordinate coordinate = analyseMap.getNearestTileCoordinate("health", getPositionCoordinate());
+		if (coordinate != null) {
+			output.write("find nearest health:" + coordinate.toString() + "\n");
+		}
+		*/
 		/*
 		// try to use AStar
 		findPathAlgorithm.setStart(2, 3);
@@ -106,12 +114,13 @@ public class MyAutoController extends CarController {
 	}
 
 	@Override
-	public void update() {
-		
+	public void update() {		
 		// Gets what the car can see
 		HashMap<Coordinate, MapTile> currentView = getView();
 		Coordinate currentCoordinate = getPositionCoordinate();
-		
+		analyseMap.updateCarMap(currentView);
+		findPathAlgorithm.resetMaze(analyseMap.maze);
+		strategy.update();
 		// make sure the car is moving
 		if (getSpeed() == 0) {
 			if(checkWallAhead(getOrientation(),currentView)) {
@@ -125,12 +134,16 @@ public class MyAutoController extends CarController {
 		findPathAlgorithm.setStart(currentCoordinate);
 		findPathAlgorithm.setEnd(strategy.destCoordinate);
 		// get Next Coordinate the car should arrive
-		Node next = findPathAlgorithm.findPath().next;		
-		Coordinate destCoordinate = new Coordinate(next.x, next.y);
-		output.write("next coordinate:" + destCoordinate.toString() + "\n");
-		moveHandler(currentCoordinate, getOrientation(), destCoordinate);
-		//analyseMap.updateCarMap(currentView);
-		 
+		try {
+			Node next = findPathAlgorithm.findPath().next;
+			Coordinate destCoordinate = new Coordinate(next.x, next.y);
+			output.write("next coordinate:" + destCoordinate.toString() + "\n");
+			moveHandler(currentCoordinate, getOrientation(), destCoordinate);
+			
+		} catch(Exception e) {
+			applyBrake();
+			return;
+		}		 
 	}
 	
 	public Coordinate getPositionCoordinate() {

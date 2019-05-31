@@ -1,3 +1,4 @@
+Now aim is EXPLORE, DEST:1,7
 Dest: 1,7
 next coordinate:3,3
 next coordinate:4,3
@@ -12,17 +13,12 @@ next coordinate:7,8
 next coordinate:7,9
 next coordinate:7,10
 next coordinate:7,11
+Now aim is PARCEL, DEST:5,15
 next coordinate:7,12
 next coordinate:7,13
 next coordinate:6,13
 next coordinate:5,13
-next coordinate:4,13
-next coordinate:3,13
-next coordinate:2,13
-next coordinate:1,13
-next coordinate:1,12
-next coordinate:1,11
-next coordinate:1,10
-next coordinate:1,9
-next coordinate:1,8
-next coordinate:1,7
+next coordinate:5,14
+next coordinate:5,15
+next coordinate:5,15
+next coordinate:5,15

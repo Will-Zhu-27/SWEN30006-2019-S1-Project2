@@ -16,7 +16,7 @@ public class AnalyseMap {
 	public final static int WALL_VALUE = 1;
 	public static int HEIGHT;
 	public static int WIDTH;
-	protected HashMap<Coordinate,DetectTile> carMap;
+	protected volatile HashMap<Coordinate,DetectTile> carMap;
 	// two-dimensional arry to represent the maze
 	protected int maze[][];
 	public AnalyseMap(HashMap<Coordinate,MapTile> initialMap, int width, int height) {
@@ -96,9 +96,10 @@ public class AnalyseMap {
 			tile.setIsUpdated(true);
 			// discard tile excluding TRAP
 			if (!mapTile.isType(Type.TRAP)) {
-				// update mapTile attribute for changed Type
+				// update mapTile attribute
 				if (!mapTile.isType(Type.WALL)) {
 					tile.tile = mapTile;
+					tile.tileType = mapTile.getType().name();
 				}
 				continue;
 			}
@@ -145,18 +146,13 @@ public class AnalyseMap {
 	 * @param visionLength
 	 * @return null if there is no that Tile.
 	 */
-	public Coordinate getNearestTileCoordinate(Type givenType, String trapName, Coordinate startCoordinate, int visionLength) {
+	public Coordinate getNearestTileCoordinate(String tileType, Coordinate startCoordinate) {
 		int shortestDistance = -1;
-		int x = 0, y = 0;
+		int x = -1, y = -1;
 		for (Coordinate coordinate : carMap.keySet()) {
 			DetectTile detectTile = carMap.get(coordinate);
-			if (!detectTile.tile.isType(givenType)) {
+			if (!detectTile.tileType.equals(tileType)) {
 				continue;
-			}
-			if (trapName != null) {
-				if (((TrapTile)(detectTile.tile)).getTrap() != trapName) {
-					continue;
-				}
 			}
 			if (shortestDistance == -1) {
 				shortestDistance = getDistance(startCoordinate, coordinate);

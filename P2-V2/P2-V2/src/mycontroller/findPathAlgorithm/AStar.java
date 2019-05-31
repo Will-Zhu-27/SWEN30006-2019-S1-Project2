@@ -13,8 +13,8 @@ public class AStar {
  
     public static final int STEP = 1;
  
-    private ArrayList<Node> openList = new ArrayList<Node>();
-    private ArrayList<Node> closeList = new ArrayList<Node>();
+    private ArrayList<Node> openList;
+    private ArrayList<Node> closeList;
     
     private Node start;
     private Node end;
@@ -230,6 +230,6 @@ public class AStar {
         }
  
         // next Node
-        public Node next;
+        public Node next = null;
     }
 }

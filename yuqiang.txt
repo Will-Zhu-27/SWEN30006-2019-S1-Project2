@@ -7,13 +7,15 @@ getMaps():应该能得到完整的地图，但只有WALL,ROAD,START,FINISH
 
 findPathAlgorithm：之后改成接口，可使用不同的算法寻找路径。
 
-Strategy:
+Strategy: 先无视伤害
     1.initialize:
         已知范围内是否有parcel
         1.有，aim = PARCEL. destCoordinate为parcel的地址
         2.无，aim = EXPLORE. destCoordinate为最近的未更新的tile的地址
 
 控制车, 车必须处于行驶状态，否则没有办法转向。
-    1.得到下一步的位置。
-    2.
+    流程：
+        1.先更新carMap
+        得到下一步的位置。
+        2.
     

@@ -16,25 +16,28 @@ import world.WorldSpatial.Direction;
 public class Strategy {
 	public enum AIM {EXPLORE, EXIT, PARCEL, HEALTH};
 	protected AIM aim;
-	protected MyAutoController myAutoController;
+	protected Output output;
+	protected volatile MyAutoController myAutoController;
 	protected Coordinate destCoordinate;
-	public Strategy(MyAutoController myAutoController) {
+	public Strategy(MyAutoController myAutoController, Output output) {
 		this.myAutoController = myAutoController;
+		this.output = output;
 	}
 	
 	public void initializeAim() {
 		Coordinate coordinate = null;
 		// search parcel firstly
-		coordinate = myAutoController.analyseMap.getNearestTileCoordinate(Type.TRAP, 
-			"parcel", myAutoController.getPositionCoordinate(), 
-			myAutoController.getViewSquare());
+		coordinate = myAutoController.analyseMap.getNearestTileCoordinate( 
+			"parcel", myAutoController.getPositionCoordinate());
 		if (coordinate == null) {
 			aim = AIM.EXPLORE;
 			//destCoordinate = myAutoController.analyseMap.getNearestUnupdatedCoordinate(myAutoController.getPositionCoordinate(), myAutoController.getViewSquare());
 			destCoordinate = new Coordinate(1, 7);
+			output.write("Now aim is EXPLORE, DEST:" + destCoordinate.toString() + "\n");
 		} else {
 			aim = AIM.PARCEL;
 			destCoordinate = coordinate;
+			output.write("Now aim is PARCEL, DEST:" + destCoordinate.toString() + "\n");
 		}
 	}
 	
@@ -47,6 +50,24 @@ public class Strategy {
 		// to be continue
 		
 		return Direction.EAST;
+	}
+	
+	/**
+	 * update strategy
+	 */
+	public void update() {
+		Coordinate coordinate = null;
+		if (aim != AIM.EXPLORE) {
+			return;
+		}
+		// search parcel firstly
+		coordinate = myAutoController.analyseMap.getNearestTileCoordinate( 
+			"parcel", myAutoController.getPositionCoordinate());
+		if (coordinate != null){
+			aim = AIM.PARCEL;
+			destCoordinate = coordinate;
+			output.write("Now aim is PARCEL, DEST:" + destCoordinate.toString() + "\n");
+		}
 	}
 	
 }

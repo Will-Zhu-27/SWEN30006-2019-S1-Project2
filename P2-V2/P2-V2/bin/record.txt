@@ -1,1 +1,50 @@
+Now aim is EXPLORE, DEST:1,7
 Dest: 1,7
+aim didn't change
+next coordinate:3,3
+aim didn't change
+next coordinate:4,3
+aim didn't change
+next coordinate:5,3
+aim didn't change
+next coordinate:6,3
+aim didn't change
+next coordinate:7,3
+aim didn't change
+next coordinate:7,4
+aim didn't change
+next coordinate:7,5
+aim didn't change
+next coordinate:7,6
+aim didn't change
+next coordinate:7,7
+aim didn't change
+next coordinate:7,8
+aim didn't change
+next coordinate:7,9
+aim didn't change
+next coordinate:7,10
+aim didn't change
+next coordinate:7,11
+aim didn't change
+next coordinate:7,12
+aim didn't change
+next coordinate:7,13
+aim didn't change
+next coordinate:6,13
+aim didn't change
+next coordinate:5,13
+aim didn't change
+next coordinate:4,13
+aim didn't change
+next coordinate:3,13
+aim didn't change
+next coordinate:2,13
+aim didn't change
+next coordinate:1,13
+aim didn't change
+next coordinate:1,12
+aim didn't change
+next coordinate:1,11
+aim didn't change
+next coordinate:1,10
