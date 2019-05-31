@@ -4,3 +4,16 @@ getMaps():应该能得到完整的地图，但只有WALL,ROAD,START,FINISH
 
 用二维数组代表当前的地图，0代表通行。1代表不能通行。
 测试出发地(2, 3),目的地(18, 15)
+
+findPathAlgorithm：之后改成接口，可使用不同的算法寻找路径。
+
+Strategy:
+    1.initialize:
+        已知范围内是否有parcel
+        1.有，aim = PARCEL. destCoordinate为parcel的地址
+        2.无，aim = EXPLORE. destCoordinate为最近的未更新的tile的地址
+
+控制车, 车必须处于行驶状态，否则没有办法转向。
+    1.得到下一步的位置。
+    2.
+    

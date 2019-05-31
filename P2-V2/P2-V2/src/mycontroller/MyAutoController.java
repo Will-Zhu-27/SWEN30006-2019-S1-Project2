@@ -15,6 +15,7 @@ import com.badlogic.gdx.Input;
 import tiles.MapTile;
 import utilities.Coordinate;
 import world.WorldSpatial;
+import world.WorldSpatial.Direction;
 
 /**
  * 
@@ -27,19 +28,24 @@ public class MyAutoController extends CarController {
 	// Car Speed to move at
 	private final int CAR_MAX_SPEED = 1;
 	private Output output;
-	private AnalyseMap analyseMap;
+	protected AnalyseMap analyseMap;
 	private Strategy strategy;
-	
+	private AStar findPathAlgorithm;
 	public MyAutoController(Car car) {
 		super(car);
-		strategy = new Strategy();
+		strategy = new Strategy(this);
 		output = new Output("record.txt");
 		analyseMap = new AnalyseMap(getMap(), mapWidth(), mapHeight());
-		
+		findPathAlgorithm = new AStar(analyseMap.maze);
+		// update Start point view
+		analyseMap.updateCarMap(getView());
+		// get first aim
+		strategy.initializeAim();
+		output.write("Dest: " + strategy.destCoordinate.toString() + "\n");
+		/*
 		// try to use AStar
-		AStar findPathAlgorithm = new AStar(analyseMap.maze);
 		findPathAlgorithm.setStart(2, 3);
-		findPathAlgorithm.setEnd(18, 15);
+		findPathAlgorithm.setEnd(10, 3);
 		Node next = findPathAlgorithm.findPath();
 		
 		ArrayList<Node> arrayList = new ArrayList<Node>();
@@ -49,6 +55,7 @@ public class MyAutoController extends CarController {
             output.write(path);
             next = next.next;
         }
+    	output.write("**********end**********\n");
     	
     	for (int y = mapHeight() - 1; y >= 0; y--) {
     		String temp = "";
@@ -63,6 +70,7 @@ public class MyAutoController extends CarController {
             temp += "\n";
             output.write(temp);
         }
+        */
 		//output.write(analyseMap.getMazeGraphString());
 		/*
 		String coordinateString = getPosition();
@@ -99,9 +107,206 @@ public class MyAutoController extends CarController {
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub					
-		//analyseMap.updateCarMap(getView());
-		//strategy.getPath(, destCoordinate);
+		
+		// Gets what the car can see
+		HashMap<Coordinate, MapTile> currentView = getView();
+		Coordinate currentCoordinate = getPositionCoordinate();
+		
+		// make sure the car is moving
+		if (getSpeed() == 0) {
+			if(checkWallAhead(getOrientation(),currentView)) {
+				applyReverseAcceleration();
+			} else {
+				applyForwardAcceleration();
+			}
+		}
+		
+		
+		findPathAlgorithm.setStart(currentCoordinate);
+		findPathAlgorithm.setEnd(strategy.destCoordinate);
+		// get Next Coordinate the car should arrive
+		Node next = findPathAlgorithm.findPath().next;		
+		Coordinate destCoordinate = new Coordinate(next.x, next.y);
+		output.write("next coordinate:" + destCoordinate.toString() + "\n");
+		moveHandler(currentCoordinate, getOrientation(), destCoordinate);
+		//analyseMap.updateCarMap(currentView);
+		 
+	}
+	
+	public Coordinate getPositionCoordinate() {
+		String temp = getPosition();
+		int x = Integer.parseInt(temp.split(",")[0]);
+		int y = Integer.parseInt(temp.split(",")[1]);
+		return new Coordinate(x, y);
+	}
+	
+	public void moveHandler(Coordinate currentCoordinate, Direction direction, Coordinate destCoordinate) {
+		int diffX = destCoordinate.x - currentCoordinate.x;
+		int diffY = destCoordinate.y - currentCoordinate.y;
+		Direction relativeDirection = null;
+		if (diffX == 0) {
+			if (diffY > 0) {
+				relativeDirection = Direction.NORTH;
+			} else {
+				relativeDirection = Direction.SOUTH;
+			}
+		} else {
+			if (diffX > 0) {
+				relativeDirection = Direction.EAST;
+			} else {
+				relativeDirection = Direction.WEST;
+			}
+		}
+		
+		switch (direction) {
+		case EAST: {
+			if (relativeDirection == Direction.EAST) {
+				applyForwardAcceleration();
+			} else if (relativeDirection == Direction.WEST) {
+				applyReverseAcceleration();
+			} else if (relativeDirection == Direction.SOUTH) {
+				turnRight();
+			} else {
+				turnLeft();
+			}
+			break;
+		}
+		case WEST: {
+			if (relativeDirection == Direction.EAST) {
+				applyReverseAcceleration();
+			} else if (relativeDirection == Direction.WEST) {
+				applyForwardAcceleration();
+			} else if (relativeDirection == Direction.SOUTH) {
+				turnLeft();
+			} else {
+				turnRight();
+			}
+			break;
+		}
+		case SOUTH: {
+			if (relativeDirection == Direction.EAST) {
+				turnLeft();
+			} else if (relativeDirection == Direction.WEST) {
+				turnRight();
+			} else if (relativeDirection == Direction.SOUTH) {
+				applyForwardAcceleration();
+			} else {
+				applyReverseAcceleration();
+			}
+			break;
+		}
+		case NORTH: {
+			if (relativeDirection == Direction.EAST) {
+				turnRight();
+			} else if (relativeDirection == Direction.WEST) {
+				turnLeft();
+			} else if (relativeDirection == Direction.SOUTH) {
+				applyReverseAcceleration();
+			} else {
+				applyForwardAcceleration();
+			}
+			break;
+		}
+		}
+	}
+	
+	/**
+	 * Check if you have a wall in front of you!
+	 * @param orientation the orientation we are in based on WorldSpatial
+	 * @param currentView what the car can currently see
+	 * @return
+	 */
+	private boolean checkWallAhead(WorldSpatial.Direction orientation, HashMap<Coordinate, MapTile> currentView){
+		switch(orientation){
+		case EAST:
+			return checkEast(currentView);
+		case NORTH:
+			return checkNorth(currentView);
+		case SOUTH:
+			return checkSouth(currentView);
+		case WEST:
+			return checkWest(currentView);
+		default:
+			return false;
+		}
+	}
+	
+	/**
+	 * Check if the wall is on your left hand side given your orientation
+	 * @param orientation
+	 * @param currentView
+	 * @return
+	 */
+	private boolean checkFollowingWall(WorldSpatial.Direction orientation, HashMap<Coordinate, MapTile> currentView) {
+		
+		switch(orientation){
+		case EAST:
+			return checkNorth(currentView);
+		case NORTH:
+			return checkWest(currentView);
+		case SOUTH:
+			return checkEast(currentView);
+		case WEST:
+			return checkSouth(currentView);
+		default:
+			return false;
+		}	
+	}
+	
+	/**
+	 * Method below just iterates through the list and check in the correct coordinates.
+	 * i.e. Given your current position is 10,10
+	 * checkEast will check up to wallSensitivity amount of tiles to the right.
+	 * checkWest will check up to wallSensitivity amount of tiles to the left.
+	 * checkNorth will check up to wallSensitivity amount of tiles to the top.
+	 * checkSouth will check up to wallSensitivity amount of tiles below.
+	 */
+	public boolean checkEast(HashMap<Coordinate, MapTile> currentView){
+		// Check tiles to my right
+		Coordinate currentPosition = new Coordinate(getPosition());
+		for(int i = 0; i <= wallSensitivity; i++){
+			MapTile tile = currentView.get(new Coordinate(currentPosition.x+i, currentPosition.y));
+			if(tile.isType(MapTile.Type.WALL)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean checkWest(HashMap<Coordinate,MapTile> currentView){
+		// Check tiles to my left
+		Coordinate currentPosition = new Coordinate(getPosition());
+		for(int i = 0; i <= wallSensitivity; i++){
+			MapTile tile = currentView.get(new Coordinate(currentPosition.x-i, currentPosition.y));
+			if(tile.isType(MapTile.Type.WALL)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean checkNorth(HashMap<Coordinate,MapTile> currentView){
+		// Check tiles to towards the top
+		Coordinate currentPosition = new Coordinate(getPosition());
+		for(int i = 0; i <= wallSensitivity; i++){
+			MapTile tile = currentView.get(new Coordinate(currentPosition.x, currentPosition.y+i));
+			if(tile.isType(MapTile.Type.WALL)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean checkSouth(HashMap<Coordinate,MapTile> currentView){
+		// Check tiles towards the bottom
+		Coordinate currentPosition = new Coordinate(getPosition());
+		for(int i = 0; i <= wallSensitivity; i++){
+			MapTile tile = currentView.get(new Coordinate(currentPosition.x, currentPosition.y-i));
+			if(tile.isType(MapTile.Type.WALL)){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 }

@@ -2,6 +2,8 @@ package mycontroller.findPathAlgorithm;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import utilities.Coordinate;
  
 public class AStar {
  
@@ -23,12 +25,26 @@ public class AStar {
     	yRange = NODES.length;
     }
     
+    public void resetMaze(int maze[][]) {
+    	NODES = maze;
+    	xRange = NODES[0].length;
+    	yRange = NODES.length;
+    }
+    
     public void setStart(int x, int y) {
     	start = new Node(x, y);
     }
     
+    public void setStart(Coordinate coordinate) {
+    	start = new Node(coordinate.x, coordinate.y);
+    }
+    
     public void setEnd(int x, int y) {
     	end = new Node(x, y);
+    }
+    
+    public void setEnd(Coordinate coordinate) {
+    	end = new Node(coordinate.x, coordinate.y);
     }
  
     public Node findMinFNodeInOpneList() {
@@ -75,7 +91,8 @@ public class AStar {
     }
  
     public Node findPath() {
- 
+    	openList = new ArrayList<Node>();
+        closeList = new ArrayList<Node>();
 
         openList.add(end);
  
@@ -212,6 +229,7 @@ public class AStar {
             this.F = this.G + this.H;
         }
  
+        // next Node
         public Node next;
     }
 }

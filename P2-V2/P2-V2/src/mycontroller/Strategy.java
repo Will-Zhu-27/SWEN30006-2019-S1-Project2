@@ -3,6 +3,8 @@ package mycontroller;
 import java.util.HashMap;
 
 import controller.CarController;
+import tiles.MapTile.Type;
+import tiles.TrapTile;
 import utilities.Coordinate;
 import world.WorldSpatial.Direction;
 
@@ -13,18 +15,27 @@ import world.WorldSpatial.Direction;
  */
 public class Strategy {
 	public enum AIM {EXPLORE, EXIT, PARCEL, HEALTH};
-	protected AIM currentAim;
-	
-	public Strategy(AIM aim) {
-		currentAim = aim;
+	protected AIM aim;
+	protected MyAutoController myAutoController;
+	protected Coordinate destCoordinate;
+	public Strategy(MyAutoController myAutoController) {
+		this.myAutoController = myAutoController;
 	}
 	
-	public Strategy() {
-		currentAim = AIM.EXPLORE;
-	}
-	
-	public void setAim(AIM aim) {
-		currentAim = aim;
+	public void initializeAim() {
+		Coordinate coordinate = null;
+		// search parcel firstly
+		coordinate = myAutoController.analyseMap.getNearestTileCoordinate(Type.TRAP, 
+			"parcel", myAutoController.getPositionCoordinate(), 
+			myAutoController.getViewSquare());
+		if (coordinate == null) {
+			aim = AIM.EXPLORE;
+			//destCoordinate = myAutoController.analyseMap.getNearestUnupdatedCoordinate(myAutoController.getPositionCoordinate(), myAutoController.getViewSquare());
+			destCoordinate = new Coordinate(1, 7);
+		} else {
+			aim = AIM.PARCEL;
+			destCoordinate = coordinate;
+		}
 	}
 	
 	public Direction getMoveOrientation(AnalyseMap map, CarController controller) {

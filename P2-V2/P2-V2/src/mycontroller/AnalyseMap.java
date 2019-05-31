@@ -96,6 +96,10 @@ public class AnalyseMap {
 			tile.setIsUpdated(true);
 			// discard tile excluding TRAP
 			if (!mapTile.isType(Type.TRAP)) {
+				// update mapTile attribute for changed Type
+				if (!mapTile.isType(Type.WALL)) {
+					tile.tile = mapTile;
+				}
 				continue;
 			}
 			// update tileType of DetectTile in carMap
@@ -127,6 +131,47 @@ public class AnalyseMap {
 			}
 		}
 		
+		if (shortestDistance == -1) {
+			return null;
+		}
+		return new Coordinate(x, y);
+	}
+	
+	/**
+	 * get the coordinate of nearest given Tile 
+	 * @param givenType
+	 * @param trapName null if givenType is not TRAP
+	 * @param startCoordinate
+	 * @param visionLength
+	 * @return null if there is no that Tile.
+	 */
+	public Coordinate getNearestTileCoordinate(Type givenType, String trapName, Coordinate startCoordinate, int visionLength) {
+		int shortestDistance = -1;
+		int x = 0, y = 0;
+		for (Coordinate coordinate : carMap.keySet()) {
+			DetectTile detectTile = carMap.get(coordinate);
+			if (!detectTile.tile.isType(givenType)) {
+				continue;
+			}
+			if (trapName != null) {
+				if (((TrapTile)(detectTile.tile)).getTrap() != trapName) {
+					continue;
+				}
+			}
+			if (shortestDistance == -1) {
+				shortestDistance = getDistance(startCoordinate, coordinate);
+				x = coordinate.x;
+				y = coordinate.y;
+			} else {
+				int distance = getDistance(startCoordinate, coordinate);
+				//System.err.println(startCoordinate.toString() + " to " + coordinate.toString() + ":" + distance);
+				if (shortestDistance > distance) {
+					x = coordinate.x;
+					y = coordinate.y;
+					shortestDistance = distance;
+				}
+			}
+		}
 		if (shortestDistance == -1) {
 			return null;
 		}
