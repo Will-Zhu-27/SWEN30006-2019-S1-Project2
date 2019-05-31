@@ -40,14 +40,14 @@ public class MyAutoController extends CarController {
 		AStar findPathAlgorithm = new AStar(analyseMap.maze);
 		findPathAlgorithm.setStart(2, 3);
 		findPathAlgorithm.setEnd(18, 15);
-		Node parent = findPathAlgorithm.findPath();
+		Node next = findPathAlgorithm.findPath();
 		
 		ArrayList<Node> arrayList = new ArrayList<Node>();
-    	while (parent != null) {
-    		arrayList.add(new Node(parent.x, parent.y));
-            String path = "(" + parent.x + "," + parent.y + ")\n";
+    	while (next != null) {
+    		arrayList.add(new Node(next.x, next.y));
+            String path = "(" + next.x + "," + next.y + ")\n";
             output.write(path);
-            parent = parent.parent;
+            next = next.next;
         }
     	
     	for (int y = mapHeight() - 1; y >= 0; y--) {

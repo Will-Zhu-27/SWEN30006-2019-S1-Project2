@@ -77,7 +77,7 @@ public class AStar {
     public Node findPath() {
  
 
-        openList.add(start);
+        openList.add(end);
  
         while (openList.size() > 0) {
 
@@ -92,28 +92,28 @@ public class AStar {
                 if (exists(openList, node)) {
                     foundPoint(currentNode, node);
                 } else {
-                    notFoundPoint(currentNode, end, node);
+                    notFoundPoint(currentNode, start, node);
                 }
             }
-            if (find(openList, end) != null) {
-                return find(openList, end);
+            if (find(openList, start) != null) {
+                return find(openList, start);
             }
         }
  
-        return find(openList, end);
+        return find(openList, start);
     }
  
     private void foundPoint(Node tempStart, Node node) {
         int G = calcG(tempStart, node);
         if (G < node.G) {
-            node.parent = tempStart;
+            node.next = tempStart;
             node.G = G;
             node.calcF();
         }
     }
  
     private void notFoundPoint(Node tempStart, Node end, Node node) {
-        node.parent = tempStart;
+        node.next = tempStart;
         node.G = calcG(tempStart, node);
         node.H = calcH(end, node);
         node.calcF();
@@ -122,7 +122,7 @@ public class AStar {
  
     private int calcG(Node start, Node node) {
         int G = STEP;
-        int parentG = node.parent != null ? node.parent.G : 0;
+        int parentG = node.next != null ? node.next.G : 0;
         return G + parentG;
     }
  
@@ -153,7 +153,7 @@ public class AStar {
             // System.out.println(parent.x + ", " + parent.y);
             arrayList.add(new Node(parent.x, parent.y));
             System.out.println("(" + parent.x + "," + parent.y + ")");
-            parent = parent.parent;
+            parent = parent.next;
         }
     	for (int i = 0; i < NODES.length; i++) {
             for (int j = 0; j < NODES[0].length; j++) {
@@ -212,6 +212,6 @@ public class AStar {
             this.F = this.G + this.H;
         }
  
-        public Node parent;
+        public Node next;
     }
 }
