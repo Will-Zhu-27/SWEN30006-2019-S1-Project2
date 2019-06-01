@@ -188,6 +188,39 @@ public class AnalyseMap {
 		if (shortestDistance == -1) {
 			return null;
 		}
+		if (shortestDistance == Integer.MAX_VALUE) {
+			return getNearestTileCoordinateIgnoreDamage(tileType, startCoordinate);
+		}
+		
+		return new Coordinate(x, y);
+	}
+	
+	private Coordinate getNearestTileCoordinateIgnoreDamage(String tileType, Coordinate startCoordinate) {
+		int shortestDistance = -1;
+		int x = -1, y = -1;
+		for (Coordinate coordinate : carMap.keySet()) {
+			DetectTile detectTile = carMap.get(coordinate);
+			if (!detectTile.tileType.equals(tileType)) {
+				continue;
+			}
+			if (shortestDistance == -1) {
+				shortestDistance = getDistance(startCoordinate, coordinate, mazeFuelMode);
+				x = coordinate.x;
+				y = coordinate.y;
+			} else {
+				int distance = getDistance(startCoordinate, coordinate, mazeFuelMode);
+				//System.err.println(startCoordinate.toString() + " to " + coordinate.toString() + ":" + distance);
+				if (shortestDistance > distance) {
+					x = coordinate.x;
+					y = coordinate.y;
+					shortestDistance = distance;
+				}
+			}
+		}
+		if (shortestDistance == -1) {
+			return null;
+		}
+		
 		return new Coordinate(x, y);
 	}
 	

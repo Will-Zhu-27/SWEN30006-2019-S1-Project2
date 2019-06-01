@@ -155,7 +155,7 @@ public class MyAutoController extends CarController {
 		HashMap<Coordinate, MapTile> currentView = getView();
 		Coordinate currentCoordinate = getPositionCoordinate();
 		analyseMap.updateCarMap(currentView);
-		findPathAlgorithm.resetMaze(analyseMap.mazeFuelMode);
+		
 		strategy.update();
 		// make sure the car is moving
 		if (getSpeed() == 0) {
@@ -165,13 +165,20 @@ public class MyAutoController extends CarController {
 				applyForwardAcceleration();
 			}
 		}
-
+		findPathAlgorithm.resetMaze(analyseMap.mazeHealthMode);
 		findPathAlgorithm.setStart(currentCoordinate);
 		findPathAlgorithm.setEnd(strategy.destCoordinate);
+		Node next = findPathAlgorithm.findPath();
+		if (next == null) {
+			findPathAlgorithm.resetMaze(analyseMap.mazeFuelMode);
+			findPathAlgorithm.setStart(currentCoordinate);
+			findPathAlgorithm.setEnd(strategy.destCoordinate);
+			next = findPathAlgorithm.findPath();
+		}
 		// get Next Coordinate the car should arrive
 		// first node is currentCoordinate
 		try {
-			Node next = findPathAlgorithm.findPath().next;
+			next = next.next;
 			Coordinate destCoordinate = new Coordinate(next.x, next.y);
 			output.write("dest coordinate " + strategy.destCoordinate.toString() + "current coordinate "
 					+ currentCoordinate.toString() + " next coordinate:" + destCoordinate.toString() + "\n");

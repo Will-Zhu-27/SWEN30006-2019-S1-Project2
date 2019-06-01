@@ -22,6 +22,6 @@ Strategy:
 目前是无视health，即可以理解为fule mode
 
 distance计算时用findPathRoad
-
+发现parcel时，无论如何都会设为第一目标进行拾取
 把lava当作墙的health mode：
     1. EXPLORE时：
