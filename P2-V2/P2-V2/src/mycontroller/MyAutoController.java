@@ -1,6 +1,7 @@
 package mycontroller;
 
 import controller.CarController;
+import mycontroller.Strategy.AIM;
 import mycontroller.findPathAlgorithm.AStar;
 import mycontroller.findPathAlgorithm.AStar.Node;
 import swen30006.driving.Simulation;
@@ -44,6 +45,37 @@ public class MyAutoController extends CarController {
 		// get first aim
 		strategy.initializeAim();
 		output.write("Dest: " + strategy.destCoordinate.toString() + "\n");
+		output.write("need find " + numParcels() + "\n");
+		findPathAlgorithm.setStart(16,  14);
+		findPathAlgorithm.setEnd(22, 16);
+		Node parent = findPathAlgorithm.findPath();
+		output.write("from (16, 14) to (22, 16)\n");
+    	while (parent != null) {
+            output.write("(" + parent.x + "," + parent.y + ")\n");
+            parent = parent.next;
+        }
+    	output.write("******end******\n");
+		String graph = ""; 
+		for (int x = 0; x < mapWidth(); x++) {
+			for (int y = 0; y < mapHeight(); y++) {
+				Coordinate coordinate = new Coordinate(x, y);
+				DetectTile detectTile = analyseMap.carMap.get(coordinate);
+				if (y == 0) {
+					graph += "{";
+				}
+				if (detectTile.tileType.equals("WALL")) {
+					graph += "1,"; 
+				} else {
+					graph += "0,"; 
+				}
+				if (y == mapHeight() - 1) {
+					graph += "},\n";
+				}
+			}
+		}
+		output.write(graph);
+		      
+		 
 		/*
 		Coordinate coordinate = analyseMap.getNearestTileCoordinate("health", getPositionCoordinate());
 		if (coordinate != null) {
@@ -114,7 +146,10 @@ public class MyAutoController extends CarController {
 	}
 
 	@Override
-	public void update() {		
+	public void update() {
+		if (strategy.aim == AIM.WAITTING) {
+			return;
+		}
 		// Gets what the car can see
 		HashMap<Coordinate, MapTile> currentView = getView();
 		Coordinate currentCoordinate = getPositionCoordinate();
@@ -123,27 +158,27 @@ public class MyAutoController extends CarController {
 		strategy.update();
 		// make sure the car is moving
 		if (getSpeed() == 0) {
-			if(checkWallAhead(getOrientation(),currentView)) {
+			if (checkWallAhead(getOrientation(), currentView)) {
 				applyReverseAcceleration();
 			} else {
 				applyForwardAcceleration();
 			}
 		}
-		
-		
+
 		findPathAlgorithm.setStart(currentCoordinate);
 		findPathAlgorithm.setEnd(strategy.destCoordinate);
 		// get Next Coordinate the car should arrive
+		// first node is currentCoordinate
 		try {
 			Node next = findPathAlgorithm.findPath().next;
 			Coordinate destCoordinate = new Coordinate(next.x, next.y);
-			output.write("next coordinate:" + destCoordinate.toString() + "\n");
+			output.write("dest coordinate " + strategy.destCoordinate.toString() + "current coordinate "
+					+ currentCoordinate.toString() + " next coordinate:" + destCoordinate.toString() + "\n");
 			moveHandler(currentCoordinate, getOrientation(), destCoordinate);
-			
-		} catch(Exception e) {
+		} catch (Exception e) {
 			applyBrake();
-			return;
-		}		 
+		}
+		
 	}
 	
 	public Coordinate getPositionCoordinate() {

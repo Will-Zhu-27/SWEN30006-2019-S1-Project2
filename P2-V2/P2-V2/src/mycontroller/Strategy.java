@@ -14,7 +14,7 @@ import world.WorldSpatial.Direction;
  *
  */
 public class Strategy {
-	public enum AIM {EXPLORE, EXIT, PARCEL, HEALTH};
+	public enum AIM {EXPLORE, EXIT, PARCEL, HEALTH, WAITTING};
 	protected AIM aim;
 	protected Output output;
 	protected volatile MyAutoController myAutoController;
@@ -25,14 +25,27 @@ public class Strategy {
 	}
 	
 	public void initializeAim() {
+		// get enough parcels
+		if(myAutoController.numParcelsFound() == myAutoController.numParcels()) {
+			aim = AIM.EXIT;
+			Coordinate coordinate = myAutoController.analyseMap.getNearestTileCoordinate("FINISH", myAutoController.getPositionCoordinate());
+			if (coordinate == null) {
+				output.write("Now aim is EXIT, but FINISH doesn't be found, and no unupdated coordinate\n");
+				System.exit(1);
+			} else {
+				destCoordinate = coordinate;
+				output.write("Now aim is EXIT, FINISH is " + destCoordinate.toString() + "\n");
+			}
+			return;
+		}
+		
 		Coordinate coordinate = null;
 		// search parcel firstly
 		coordinate = myAutoController.analyseMap.getNearestTileCoordinate( 
 			"parcel", myAutoController.getPositionCoordinate());
 		if (coordinate == null) {
 			aim = AIM.EXPLORE;
-			//destCoordinate = myAutoController.analyseMap.getNearestUnupdatedCoordinate(myAutoController.getPositionCoordinate(), myAutoController.getViewSquare());
-			destCoordinate = new Coordinate(1, 7);
+			destCoordinate = myAutoController.analyseMap.getNearestUnupdatedCoordinate(myAutoController.getPositionCoordinate());
 			output.write("Now aim is EXPLORE, DEST:" + destCoordinate.toString() + "\n");
 		} else {
 			aim = AIM.PARCEL;
@@ -46,7 +59,7 @@ public class Strategy {
 		int x = Integer.parseInt(coordinateString.split(",")[0]);
 		int y = Integer.parseInt(coordinateString.split(",")[1]);
 		Coordinate co = new Coordinate(x, y);
-		map.getNearestUnupdatedCoordinate(co, controller.getViewSquare());
+		map.getNearestUnupdatedCoordinate(co);
 		// to be continue
 		
 		return Direction.EAST;
@@ -56,18 +69,33 @@ public class Strategy {
 	 * update strategy
 	 */
 	public void update() {
-		Coordinate coordinate = null;
-		if (aim != AIM.EXPLORE) {
+		if (aim == AIM.WAITTING) {
 			return;
 		}
-		// search parcel firstly
-		coordinate = myAutoController.analyseMap.getNearestTileCoordinate( 
-			"parcel", myAutoController.getPositionCoordinate());
-		if (coordinate != null){
-			aim = AIM.PARCEL;
-			destCoordinate = coordinate;
-			output.write("Now aim is PARCEL, DEST:" + destCoordinate.toString() + "\n");
+		// already arrive destCoordinate
+		if (destCoordinate.equals(myAutoController.getPositionCoordinate())) {
+			if (aim != AIM.EXIT) {
+				initializeAim();
+				return;
+			} else {
+				aim = AIM.WAITTING;
+				myAutoController.applyBrake();
+			}
 		}
+		
+		Coordinate coordinate = null;
+		if (aim == AIM.EXPLORE) {
+			// search parcel firstly
+			coordinate = myAutoController.analyseMap.getNearestTileCoordinate( 
+				"parcel", myAutoController.getPositionCoordinate());
+			if (coordinate != null){
+				aim = AIM.PARCEL;
+				destCoordinate = coordinate;
+				output.write("Now aim is PARCEL, DEST:" + destCoordinate.toString() + "\n");
+			}
+			return;
+		}
+
 	}
 	
 }

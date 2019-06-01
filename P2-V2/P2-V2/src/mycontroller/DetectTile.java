@@ -10,7 +10,7 @@ import tiles.MapTile.Type;
 public class DetectTile {
 	protected MapTile tile;
 	protected int visitedTimes = 0;
-	protected String tileType;
+	protected String tileType = "null";
 	protected boolean isUpdated;
 	protected int x;
 	protected int y;
@@ -18,7 +18,11 @@ public class DetectTile {
 	public DetectTile(MapTile tile, int x, int y) {
 		this.tile = tile;
 		tileType = tile.getType().name();
-		isUpdated = false;
+		if (tileType.equals("WALL")) {
+			isUpdated = true;
+		} else {
+			isUpdated = false;
+		}
 		visitedTimes = 0;	
 		this.x = x;
 		this.y = y;

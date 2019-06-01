@@ -1,24 +1,191 @@
-Now aim is EXPLORE, DEST:1,7
-Dest: 1,7
-next coordinate:3,3
-next coordinate:4,3
-next coordinate:5,3
-next coordinate:6,3
-next coordinate:7,3
-next coordinate:7,4
-next coordinate:7,5
-next coordinate:7,6
-next coordinate:7,7
-next coordinate:7,8
-next coordinate:7,9
-next coordinate:7,10
-next coordinate:7,11
-Now aim is PARCEL, DEST:5,15
-next coordinate:7,12
-next coordinate:7,13
-next coordinate:6,13
-next coordinate:5,13
-next coordinate:5,14
-next coordinate:5,15
-next coordinate:5,15
-next coordinate:5,15
+Now aim is EXPLORE, DEST:1,6
+Dest: 1,6
+need find 2
+from (16, 14) to (22, 16)
+******end******
+{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,},
+{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,},
+{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,},
+{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,},
+{1,0,0,0,0,0,1,1,1,1,1,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,},
+{1,0,0,0,0,0,1,1,1,1,1,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,},
+{1,0,0,0,0,0,1,1,1,1,1,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,},
+{1,0,0,0,0,0,1,1,1,1,1,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,},
+{1,0,0,0,0,0,1,1,1,1,1,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,},
+{1,0,0,0,0,0,1,1,1,1,1,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,},
+{1,1,0,0,0,0,1,1,1,1,1,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,},
+{1,1,0,0,0,0,1,1,1,1,1,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,},
+{1,1,0,0,0,0,1,1,1,1,1,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,},
+{1,1,0,0,0,0,1,1,1,1,1,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,},
+{1,1,0,0,0,0,1,1,1,1,1,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,},
+{1,1,0,0,0,0,0,1,1,1,1,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,},
+{1,1,0,0,0,0,0,1,1,1,1,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,},
+{1,1,0,0,0,0,0,1,1,1,1,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,},
+{1,1,0,0,0,0,0,1,1,1,1,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,},
+{1,1,0,0,0,0,0,1,1,1,1,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,},
+{1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,},
+{1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,},
+{1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,},
+{1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,},
+{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,},
+{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,},
+{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,},
+{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,},
+{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,},
+{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,},
+{1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,},
+{1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,},
+{1,0,0,0,0,0,1,1,0,0,0,0,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,},
+{1,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,},
+{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,},
+{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,},
+{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1,0,0,1,1,1,1,1,1,1,},
+{1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,0,0,0,1,0,1,1,0,0,1,0,0,1,1,1,1,},
+{1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,0,0,0,1,0,1,1,0,0,1,0,0,1,1,1,1,},
+{1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,0,0,0,1,0,1,1,0,0,1,0,0,1,1,1,1,},
+{1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,1,0,0,1,1,1,1,},
+{1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,1,0,0,1,1,1,1,},
+{1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,1,0,0,1,1,1,1,},
+{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,0,1,1,0,0,1,0,0,1,1,1,1,},
+{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1,0,0,1,1,1,1,1,1,1,},
+{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,},
+{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,},
+{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,},
+{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,},
+dest coordinate 1,6current coordinate 1,1 next coordinate:1,2
+dest coordinate 1,6current coordinate 2,1 next coordinate:1,1
+dest coordinate 1,6current coordinate 2,1 next coordinate:1,1
+dest coordinate 1,6current coordinate 1,1 next coordinate:1,2
+dest coordinate 1,6current coordinate 1,2 next coordinate:1,3
+dest coordinate 1,6current coordinate 1,3 next coordinate:1,4
+dest coordinate 1,6current coordinate 1,4 next coordinate:1,5
+dest coordinate 1,6current coordinate 1,5 next coordinate:1,6
+Now aim is EXPLORE, DEST:1,11
+dest coordinate 1,11current coordinate 1,6 next coordinate:1,7
+dest coordinate 1,11current coordinate 1,7 next coordinate:1,8
+dest coordinate 1,11current coordinate 1,8 next coordinate:1,9
+dest coordinate 1,11current coordinate 1,9 next coordinate:1,10
+dest coordinate 1,11current coordinate 1,10 next coordinate:1,11
+Now aim is EXPLORE, DEST:1,16
+dest coordinate 1,16current coordinate 1,11 next coordinate:1,12
+dest coordinate 1,16current coordinate 1,12 next coordinate:1,13
+dest coordinate 1,16current coordinate 1,13 next coordinate:1,14
+dest coordinate 1,16current coordinate 1,14 next coordinate:1,15
+dest coordinate 1,16current coordinate 1,15 next coordinate:1,16
+Now aim is EXPLORE, DEST:1,21
+dest coordinate 1,21current coordinate 1,16 next coordinate:1,17
+dest coordinate 1,21current coordinate 1,17 next coordinate:1,18
+dest coordinate 1,21current coordinate 1,18 next coordinate:1,19
+dest coordinate 1,21current coordinate 1,19 next coordinate:1,20
+dest coordinate 1,21current coordinate 1,20 next coordinate:1,21
+Now aim is EXPLORE, DEST:1,26
+dest coordinate 1,26current coordinate 1,21 next coordinate:1,22
+dest coordinate 1,26current coordinate 1,22 next coordinate:1,23
+dest coordinate 1,26current coordinate 1,23 next coordinate:1,24
+dest coordinate 1,26current coordinate 1,24 next coordinate:1,25
+dest coordinate 1,26current coordinate 1,25 next coordinate:1,26
+Now aim is EXPLORE, DEST:1,31
+dest coordinate 1,31current coordinate 1,26 next coordinate:1,27
+dest coordinate 1,31current coordinate 1,27 next coordinate:1,28
+dest coordinate 1,31current coordinate 1,28 next coordinate:1,29
+dest coordinate 1,31current coordinate 1,29 next coordinate:1,30
+dest coordinate 1,31current coordinate 1,30 next coordinate:1,31
+Now aim is EXPLORE, DEST:6,31
+dest coordinate 6,31current coordinate 1,31 next coordinate:2,31
+dest coordinate 6,31current coordinate 2,31 next coordinate:3,31
+dest coordinate 6,31current coordinate 3,31 next coordinate:4,31
+dest coordinate 6,31current coordinate 4,31 next coordinate:5,31
+dest coordinate 6,31current coordinate 5,31 next coordinate:6,31
+Now aim is EXPLORE, DEST:6,26
+dest coordinate 6,26current coordinate 6,31 next coordinate:6,30
+dest coordinate 6,26current coordinate 6,30 next coordinate:6,29
+dest coordinate 6,26current coordinate 6,29 next coordinate:6,28
+dest coordinate 6,26current coordinate 6,28 next coordinate:6,27
+dest coordinate 6,26current coordinate 6,27 next coordinate:6,26
+Now aim is PARCEL, DEST:9,22
+dest coordinate 9,22current coordinate 6,26 next coordinate:7,26
+dest coordinate 9,22current coordinate 7,26 next coordinate:8,26
+dest coordinate 9,22current coordinate 8,26 next coordinate:9,26
+dest coordinate 9,22current coordinate 9,26 next coordinate:9,25
+dest coordinate 9,22current coordinate 9,25 next coordinate:9,24
+dest coordinate 9,22current coordinate 9,24 next coordinate:9,23
+dest coordinate 9,22current coordinate 9,23 next coordinate:9,22
+Now aim is EXPLORE, DEST:14,22
+dest coordinate 14,22current coordinate 9,22 next coordinate:10,22
+dest coordinate 14,22current coordinate 10,22 next coordinate:11,22
+dest coordinate 14,22current coordinate 11,22 next coordinate:12,22
+dest coordinate 14,22current coordinate 12,22 next coordinate:13,22
+dest coordinate 14,22current coordinate 13,22 next coordinate:14,22
+Now aim is EXPLORE, DEST:14,27
+dest coordinate 14,27current coordinate 14,22 next coordinate:14,23
+dest coordinate 14,27current coordinate 14,23 next coordinate:14,24
+dest coordinate 14,27current coordinate 14,24 next coordinate:14,25
+dest coordinate 14,27current coordinate 14,25 next coordinate:14,26
+dest coordinate 14,27current coordinate 14,26 next coordinate:14,27
+Now aim is EXPLORE, DEST:14,32
+dest coordinate 14,32current coordinate 14,27 next coordinate:14,28
+dest coordinate 14,32current coordinate 14,28 next coordinate:14,29
+dest coordinate 14,32current coordinate 14,29 next coordinate:14,30
+dest coordinate 14,32current coordinate 14,30 next coordinate:14,31
+dest coordinate 14,32current coordinate 14,31 next coordinate:14,32
+Now aim is EXPLORE, DEST:19,21
+dest coordinate 19,21current coordinate 14,32 next coordinate:15,32
+dest coordinate 19,21current coordinate 15,32 next coordinate:16,32
+dest coordinate 19,21current coordinate 16,32 next coordinate:16,31
+dest coordinate 19,21current coordinate 16,31 next coordinate:16,30
+dest coordinate 19,21current coordinate 16,30 next coordinate:16,29
+dest coordinate 19,21current coordinate 16,29 next coordinate:16,28
+dest coordinate 19,21current coordinate 16,28 next coordinate:16,27
+dest coordinate 19,21current coordinate 16,27 next coordinate:16,26
+dest coordinate 19,21current coordinate 16,26 next coordinate:16,25
+dest coordinate 19,21current coordinate 16,25 next coordinate:16,24
+dest coordinate 19,21current coordinate 16,24 next coordinate:16,23
+dest coordinate 19,21current coordinate 16,23 next coordinate:16,22
+dest coordinate 19,21current coordinate 16,22 next coordinate:16,21
+dest coordinate 19,21current coordinate 16,21 next coordinate:17,21
+dest coordinate 19,21current coordinate 17,21 next coordinate:18,21
+dest coordinate 19,21current coordinate 18,21 next coordinate:19,21
+Now aim is EXPLORE, DEST:24,20
+dest coordinate 24,20current coordinate 19,21 next coordinate:20,21
+dest coordinate 24,20current coordinate 20,21 next coordinate:21,21
+dest coordinate 24,20current coordinate 21,21 next coordinate:22,21
+dest coordinate 24,20current coordinate 22,21 next coordinate:22,20
+Now aim is PARCEL, DEST:26,16
+dest coordinate 26,16current coordinate 22,20 next coordinate:23,20
+dest coordinate 26,16current coordinate 23,20 next coordinate:24,20
+dest coordinate 26,16current coordinate 24,20 next coordinate:25,20
+dest coordinate 26,16current coordinate 25,20 next coordinate:26,20
+dest coordinate 26,16current coordinate 26,20 next coordinate:27,20
+dest coordinate 26,16current coordinate 27,20 next coordinate:28,20
+dest coordinate 26,16current coordinate 28,20 next coordinate:29,20
+dest coordinate 26,16current coordinate 29,20 next coordinate:29,19
+dest coordinate 26,16current coordinate 29,19 next coordinate:29,18
+dest coordinate 26,16current coordinate 29,18 next coordinate:29,17
+dest coordinate 26,16current coordinate 29,17 next coordinate:29,16
+dest coordinate 26,16current coordinate 29,16 next coordinate:28,16
+dest coordinate 26,16current coordinate 28,16 next coordinate:27,16
+dest coordinate 26,16current coordinate 27,16 next coordinate:26,16
+Now aim is EXIT, FINISH is 33,1
+dest coordinate 33,1current coordinate 26,16 next coordinate:27,16
+dest coordinate 33,1current coordinate 26,16 next coordinate:27,16
+dest coordinate 33,1current coordinate 27,16 next coordinate:28,16
+dest coordinate 33,1current coordinate 28,16 next coordinate:29,16
+dest coordinate 33,1current coordinate 29,16 next coordinate:29,15
+dest coordinate 33,1current coordinate 29,15 next coordinate:29,14
+dest coordinate 33,1current coordinate 29,14 next coordinate:29,13
+dest coordinate 33,1current coordinate 29,13 next coordinate:29,12
+dest coordinate 33,1current coordinate 29,12 next coordinate:29,11
+dest coordinate 33,1current coordinate 29,11 next coordinate:29,10
+dest coordinate 33,1current coordinate 29,10 next coordinate:29,9
+dest coordinate 33,1current coordinate 29,9 next coordinate:29,8
+dest coordinate 33,1current coordinate 29,8 next coordinate:29,7
+dest coordinate 33,1current coordinate 29,7 next coordinate:29,6
+dest coordinate 33,1current coordinate 29,6 next coordinate:30,6
+dest coordinate 33,1current coordinate 30,6 next coordinate:30,5
+dest coordinate 33,1current coordinate 30,5 next coordinate:31,5
+dest coordinate 33,1current coordinate 31,5 next coordinate:32,5
+dest coordinate 33,1current coordinate 32,5 next coordinate:33,5
+dest coordinate 33,1current coordinate 33,5 next coordinate:33,4
+dest coordinate 33,1current coordinate 33,4 next coordinate:33,3
+dest coordinate 33,1current coordinate 33,3 next coordinate:33,2
+dest coordinate 33,1current coordinate 33,2 next coordinate:33,1

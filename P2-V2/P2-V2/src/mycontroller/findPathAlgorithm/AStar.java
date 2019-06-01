@@ -21,14 +21,15 @@ public class AStar {
     
     public AStar(int maze[][]) {
     	NODES = maze;
-    	xRange = NODES[0].length;
-    	yRange = NODES.length;
+    	xRange = NODES.length;
+    	yRange = NODES[0].length;
+    	System.out.println("xRange:" + xRange + " yRange:" + yRange);
     }
     
     public void resetMaze(int maze[][]) {
     	NODES = maze;
-    	xRange = NODES[0].length;
-    	yRange = NODES.length;
+    	xRange = NODES.length;
+    	yRange = NODES[0].length;
     }
     
     public void setStart(int x, int y) {
@@ -89,7 +90,12 @@ public class AStar {
         }
         return false;
     }
- 
+    
+    /**
+     * 
+     * @return Node which from start Node to end Node path, null if the start 
+     * node and end node is same; 
+     */
     public Node findPath() {
     	openList = new ArrayList<Node>();
         closeList = new ArrayList<Node>();
@@ -150,19 +156,35 @@ public class AStar {
  
     public static void main(String[] args) {
     	int[][] NODES = { 
-    	        { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    	        { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    	        { 0, 0, 0, 0, 0, 0, 0, 0, 0 }, 
-    	        { 0, 0, 0, 1, 0, 0, 0, 0, 0 }, 
-    	        { 0, 0, 0, 1, 0, 0, 0, 0, 0 },
-    	        { 0, 0, 0, 1, 0, 0, 0, 0, 0 }, 
-    	        { 0, 0, 0, 1, 0, 0, 0, 0, 0 }, 
-    	        { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    	        { 0, 0, 0, 0, 0, 0, 0, 0, 0 }, 
+    			{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+    			{1,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    			{1,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    			{1,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    			{1,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1},
+    			{1,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1},
+    			{1,1,0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,1},
+    			{1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    			{1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    			{1,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1},
+    			{1,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1},
+    			{1,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1},
+    			{1,1,0,0,0,0,1,0,0,0,0,0,1,0,0,1,1,1,1,1},
+    			{1,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1},
+    			{1,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1},
+    			{1,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1},
+    			{1,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1},
+    			{1,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1},
+    			{1,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1},
+    			{1,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+    			{1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    			{1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    			{1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    			{1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    			{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
     	    };
     	AStar findPathAlgorithm = new AStar(NODES);
-    	findPathAlgorithm.setStart(5, 1);
-    	findPathAlgorithm.setEnd(5, 5);
+    	findPathAlgorithm.setStart(16, 14);
+    	findPathAlgorithm.setEnd(22, 16);
     	Node parent = findPathAlgorithm.findPath();
     	
     	ArrayList<Node> arrayList = new ArrayList<Node>();

@@ -97,21 +97,21 @@ public class AnalyseMap {
 			// discard tile excluding TRAP
 			if (!mapTile.isType(Type.TRAP)) {
 				// update mapTile attribute
-				if (!mapTile.isType(Type.WALL)) {
-					tile.tile = mapTile;
-					tile.tileType = mapTile.getType().name();
-				}
+				tile.tile = mapTile;
+				tile.tileType = mapTile.getType().name();
+				System.err.println(coordinate.toString() + " is " + tile.tileType + "\n");
 				continue;
 			}
 			// update tileType of DetectTile in carMap
 			TrapTile trapTile = (TrapTile) mapTile;
 			tile.setTileType(trapTile.getTrap());
+			System.err.println(coordinate.toString() + " is " + tile.tileType + "\n");
 		}
 	}
 	
-	public Coordinate getNearestUnupdatedCoordinate(Coordinate startCoordinate, int visionLength) {
+	public Coordinate getNearestUnupdatedCoordinate(Coordinate startCoordinate) {
 		int shortestDistance = -1;
-		int x = 0, y = 0;
+		int x = -1, y = -1;
 		for (Coordinate coordinate : carMap.keySet()) {
 			DetectTile tile = carMap.get(coordinate);
 			if (tile.isUpdated == true) {
