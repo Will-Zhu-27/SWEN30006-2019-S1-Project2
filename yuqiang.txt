@@ -7,7 +7,7 @@ getMaps():应该能得到完整的地图，但只有WALL,ROAD,START,FINISH
 
 findPathAlgorithm：之后改成接口，可使用不同的算法寻找路径。
 
-Strategy: 先无视伤害
+Strategy: 
     1.initialize:
         已知范围内是否有parcel
         1.有，aim = PARCEL. destCoordinate为parcel的地址
@@ -19,3 +19,9 @@ Strategy: 先无视伤害
         得到下一步的位置。
         2.
     
+目前是无视health，即可以理解为fule mode
+
+distance计算时用findPathRoad
+
+把lava当作墙的health mode：
+    1. EXPLORE时：

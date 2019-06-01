@@ -26,6 +26,10 @@ public class AStar {
     	System.out.println("xRange:" + xRange + " yRange:" + yRange);
     }
     
+    public AStar() {
+    	
+    }
+    
     public void resetMaze(int maze[][]) {
     	NODES = maze;
     	xRange = NODES.length;
@@ -157,9 +161,9 @@ public class AStar {
     public static void main(String[] args) {
     	int[][] NODES = { 
     			{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-    			{1,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    			{1,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    			{1,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    			{1,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1},
+    			{1,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1},
+    			{1,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1},
     			{1,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1},
     			{1,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1},
     			{1,1,0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,1},
@@ -183,10 +187,10 @@ public class AStar {
     			{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
     	    };
     	AStar findPathAlgorithm = new AStar(NODES);
-    	findPathAlgorithm.setStart(16, 14);
-    	findPathAlgorithm.setEnd(22, 16);
+    	findPathAlgorithm.setStart(2, 2);
+    	findPathAlgorithm.setEnd(1, 7);
     	Node parent = findPathAlgorithm.findPath();
-    	
+    	//System.out.println(parent.getDistance());
     	ArrayList<Node> arrayList = new ArrayList<Node>();
     	while (parent != null) {
             // System.out.println(parent.x + ", " + parent.y);
@@ -253,5 +257,19 @@ public class AStar {
  
         // next Node
         public Node next = null;
+        
+        public int getDistance() {
+        	int distance = 0;
+        	Node tempNode = this.next;
+        	while(tempNode != null) {
+        		distance++;
+        		if (tempNode.next != null) {
+        			tempNode = tempNode.next;
+        		} else {
+        			break;
+        		}
+        	}
+        	return distance;
+        }
     }
 }

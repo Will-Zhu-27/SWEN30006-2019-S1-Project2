@@ -1,6 +1,9 @@
 package mycontroller;
 
 import java.util.HashMap;
+
+import mycontroller.findPathAlgorithm.AStar;
+import mycontroller.findPathAlgorithm.AStar.Node;
 import tiles.MapTile;
 import tiles.MapTile.Type;
 import tiles.TrapTile;
@@ -14,22 +17,31 @@ import utilities.Coordinate;
  */
 public class AnalyseMap {
 	public final static int WALL_VALUE = 1;
+	public final static int LAVA_VALUE = 1;
 	public static int HEIGHT;
 	public static int WIDTH;
 	protected volatile HashMap<Coordinate,DetectTile> carMap;
-	// two-dimensional arry to represent the maze
-	protected int maze[][];
+	// two-dimensional arry to represent the maze, only consider wall as barrier
+	protected int mazeFuelMode[][];
+	// two-dimensional arry to represent the maze, consider wall and lava as barrier
+	protected int mazeHealthMode[][];
+	protected AStar findPathAlgorithm;
+	
 	public AnalyseMap(HashMap<Coordinate,MapTile> initialMap, int width, int height) {
 		carMap = new HashMap<Coordinate,DetectTile>();
 		HEIGHT = height;
 		WIDTH = width;
-		maze = new int[WIDTH][HEIGHT];
+		mazeFuelMode = new int[WIDTH][HEIGHT];
+		mazeHealthMode = new int[WIDTH][HEIGHT];
 		for (int i = 0; i < WIDTH; i++) {
 			for (int j = 0; j < HEIGHT; j++) {
-				maze[i][j] = 0;
+				mazeFuelMode[i][j] = 0;
+				mazeHealthMode[i][j] = 0;
 			}
 		}
 		initializeCarMap(initialMap);
+		
+		findPathAlgorithm = new AStar();
 	}
 	
 	/**
@@ -40,12 +52,13 @@ public class AnalyseMap {
 		for (Coordinate coordinate : map.keySet()) {
 			MapTile mapTile = map.get(coordinate);
 			if (mapTile.getType() == Type.WALL) {
-				maze[coordinate.x][coordinate.y] = WALL_VALUE;
+				mazeFuelMode[coordinate.x][coordinate.y] = WALL_VALUE;
+				mazeHealthMode[coordinate.x][coordinate.y] = WALL_VALUE;
 			}
 			carMap.put(coordinate, new DetectTile(map.get(coordinate), coordinate.x ,coordinate.y));
 			
 		}
-		System.err.println("x range: " + WIDTH+ ", y range: " + HEIGHT);
+		//System.err.println("x range: " + WIDTH+ ", y range: " + HEIGHT);
 	}
 	
 	/**
@@ -55,7 +68,7 @@ public class AnalyseMap {
 		String ret = "";
 		for (int y = HEIGHT - 1; y >= 0; y--) {
 			for (int x = 0; x < WIDTH; x++) {
-				ret += maze[x][y];
+				ret += mazeFuelMode[x][y];
 				if (x == WIDTH - 1) {
 					ret += "\n";
 				}
@@ -99,13 +112,17 @@ public class AnalyseMap {
 				// update mapTile attribute
 				tile.tile = mapTile;
 				tile.tileType = mapTile.getType().name();
-				System.err.println(coordinate.toString() + " is " + tile.tileType + "\n");
+				//System.err.println(coordinate.toString() + " is " + tile.tileType + "\n");
 				continue;
 			}
 			// update tileType of DetectTile in carMap
 			TrapTile trapTile = (TrapTile) mapTile;
 			tile.setTileType(trapTile.getTrap());
-			System.err.println(coordinate.toString() + " is " + tile.tileType + "\n");
+			// update mazeWithoutDamage
+			if (tile.tileType.equals("lava")) {
+				mazeHealthMode[tile.x][tile.y] = LAVA_VALUE;
+			}
+			//System.err.println(coordinate.toString() + " is " + tile.tileType + "\n");
 		}
 	}
 	
@@ -118,11 +135,11 @@ public class AnalyseMap {
 				continue;
 			}
 			if (shortestDistance == -1) {
-				shortestDistance = getDistance(startCoordinate, coordinate);
+				shortestDistance = getDistance(startCoordinate, coordinate, mazeHealthMode);
 				x = coordinate.x;
 				y = coordinate.y;
 			} else {
-				int distance = getDistance(startCoordinate, coordinate);
+				int distance = getDistance(startCoordinate, coordinate, mazeHealthMode);
 				//System.err.println(startCoordinate.toString() + " to " + coordinate.toString() + ":" + distance);
 				if (shortestDistance > distance) {
 					x = coordinate.x;
@@ -155,11 +172,11 @@ public class AnalyseMap {
 				continue;
 			}
 			if (shortestDistance == -1) {
-				shortestDistance = getDistance(startCoordinate, coordinate);
+				shortestDistance = getDistance(startCoordinate, coordinate, mazeHealthMode);
 				x = coordinate.x;
 				y = coordinate.y;
 			} else {
-				int distance = getDistance(startCoordinate, coordinate);
+				int distance = getDistance(startCoordinate, coordinate, mazeHealthMode);
 				//System.err.println(startCoordinate.toString() + " to " + coordinate.toString() + ":" + distance);
 				if (shortestDistance > distance) {
 					x = coordinate.x;
@@ -174,7 +191,18 @@ public class AnalyseMap {
 		return new Coordinate(x, y);
 	}
 	
-	public int getDistance(Coordinate pointA, Coordinate pointB) {
-		return Math.abs(pointA.x - pointB.x) + Math.abs(pointA.y - pointB.y);
+	public int getDistance(Coordinate pointA, Coordinate pointB, int maze[][]) {
+		if (pointA == pointB) {
+			return 0;
+		} else {
+			findPathAlgorithm.resetMaze(maze);
+			findPathAlgorithm.setStart(pointA.x, pointA.y);
+	    	findPathAlgorithm.setEnd(pointB.x, pointB.y);
+	    	Node parent = findPathAlgorithm.findPath();
+	    	if (parent == null) {
+	    		return Integer.MAX_VALUE;
+	    	}
+			return parent.getDistance();
+		}
 	}
 }

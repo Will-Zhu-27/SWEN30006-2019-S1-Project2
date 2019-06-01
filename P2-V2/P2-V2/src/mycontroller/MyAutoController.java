@@ -39,13 +39,14 @@ public class MyAutoController extends CarController {
 		strategy = new Strategy(this, output);
 		
 		analyseMap = new AnalyseMap(getMap(), mapWidth(), mapHeight());
-		findPathAlgorithm = new AStar(analyseMap.maze);
+		findPathAlgorithm = new AStar(analyseMap.mazeFuelMode);
 		// update Start point view
 		analyseMap.updateCarMap(getView());
 		// get first aim
 		strategy.initializeAim();
 		output.write("Dest: " + strategy.destCoordinate.toString() + "\n");
 		output.write("need find " + numParcels() + "\n");
+		/*
 		findPathAlgorithm.setStart(16,  14);
 		findPathAlgorithm.setEnd(22, 16);
 		Node parent = findPathAlgorithm.findPath();
@@ -74,7 +75,7 @@ public class MyAutoController extends CarController {
 			}
 		}
 		output.write(graph);
-		      
+		*/
 		 
 		/*
 		Coordinate coordinate = analyseMap.getNearestTileCoordinate("health", getPositionCoordinate());
@@ -154,7 +155,7 @@ public class MyAutoController extends CarController {
 		HashMap<Coordinate, MapTile> currentView = getView();
 		Coordinate currentCoordinate = getPositionCoordinate();
 		analyseMap.updateCarMap(currentView);
-		findPathAlgorithm.resetMaze(analyseMap.maze);
+		findPathAlgorithm.resetMaze(analyseMap.mazeFuelMode);
 		strategy.update();
 		// make sure the car is moving
 		if (getSpeed() == 0) {
