@@ -1,4 +1,3 @@
-Now aim is EXPLORE, DEST:1,6
 Dest: 1,6
 need find 2
 dest coordinate 1,6current coordinate 1,1 next coordinate:1,2
@@ -9,7 +8,6 @@ dest coordinate 1,6current coordinate 1,2 next coordinate:1,3
 dest coordinate 1,6current coordinate 1,3 next coordinate:1,4
 dest coordinate 1,6current coordinate 1,4 next coordinate:1,5
 dest coordinate 1,6current coordinate 1,5 next coordinate:1,6
-Now aim is EXPLORE, DEST:7,5
 dest coordinate 7,5current coordinate 1,6 next coordinate:2,6
 dest coordinate 7,5current coordinate 2,6 next coordinate:3,6
 dest coordinate 7,5current coordinate 3,6 next coordinate:3,5
@@ -17,49 +15,37 @@ dest coordinate 7,5current coordinate 3,5 next coordinate:4,5
 dest coordinate 7,5current coordinate 4,5 next coordinate:5,5
 dest coordinate 7,5current coordinate 5,5 next coordinate:6,5
 dest coordinate 7,5current coordinate 6,5 next coordinate:7,5
-Now aim is EXPLORE, DEST:12,5
 dest coordinate 12,5current coordinate 7,5 next coordinate:8,5
 dest coordinate 12,5current coordinate 8,5 next coordinate:9,5
 dest coordinate 12,5current coordinate 9,5 next coordinate:10,5
 dest coordinate 12,5current coordinate 10,5 next coordinate:11,5
 dest coordinate 12,5current coordinate 11,5 next coordinate:12,5
-Now aim is EXPLORE, DEST:17,5
 dest coordinate 17,5current coordinate 12,5 next coordinate:13,5
 dest coordinate 17,5current coordinate 13,5 next coordinate:14,5
 dest coordinate 17,5current coordinate 14,5 next coordinate:15,5
 dest coordinate 17,5current coordinate 15,5 next coordinate:16,5
 dest coordinate 17,5current coordinate 16,5 next coordinate:17,5
-Now aim is EXPLORE, DEST:22,5
 dest coordinate 22,5current coordinate 17,5 next coordinate:18,5
 dest coordinate 22,5current coordinate 18,5 next coordinate:19,5
 dest coordinate 22,5current coordinate 19,5 next coordinate:20,5
 dest coordinate 22,5current coordinate 20,5 next coordinate:21,5
 dest coordinate 22,5current coordinate 21,5 next coordinate:22,5
-Now aim is EXPLORE, DEST:22,10
 dest coordinate 22,10current coordinate 22,5 next coordinate:22,6
 dest coordinate 22,10current coordinate 22,6 next coordinate:22,7
 dest coordinate 22,10current coordinate 22,7 next coordinate:22,8
 dest coordinate 22,10current coordinate 22,8 next coordinate:22,9
 dest coordinate 22,10current coordinate 22,9 next coordinate:22,10
-Now aim is EXPLORE, DEST:27,10
 dest coordinate 27,10current coordinate 22,10 next coordinate:23,10
 dest coordinate 27,10current coordinate 23,10 next coordinate:24,10
 dest coordinate 27,10current coordinate 24,10 next coordinate:25,10
 dest coordinate 27,10current coordinate 25,10 next coordinate:26,10
 dest coordinate 27,10current coordinate 26,10 next coordinate:27,10
-Now aim is PARCEL, DEST:31,8
 dest coordinate 31,8current coordinate 27,10 next coordinate:28,10
-Now aim is PARCEL, DEST:31,8
 dest coordinate 31,8current coordinate 28,10 next coordinate:29,10
-Now aim is PARCEL, DEST:31,8
 dest coordinate 31,8current coordinate 29,10 next coordinate:30,10
-Now aim is PARCEL, DEST:31,8
 dest coordinate 31,8current coordinate 30,10 next coordinate:31,10
-Now aim is PARCEL, DEST:31,8
 dest coordinate 31,8current coordinate 31,10 next coordinate:31,9
-Now aim is PARCEL, DEST:31,8
 dest coordinate 31,8current coordinate 31,9 next coordinate:31,8
-Now aim is EXPLORE, DEST:29,3
 dest coordinate 29,3current coordinate 31,8 next coordinate:30,8
 dest coordinate 29,3current coordinate 30,8 next coordinate:29,8
 dest coordinate 29,3current coordinate 29,8 next coordinate:29,7
@@ -67,225 +53,116 @@ dest coordinate 29,3current coordinate 29,7 next coordinate:29,6
 dest coordinate 29,3current coordinate 29,6 next coordinate:29,5
 dest coordinate 29,3current coordinate 29,5 next coordinate:29,4
 dest coordinate 29,3current coordinate 29,4 next coordinate:29,3
-Now aim is EXPLORE, DEST:34,3
 dest coordinate 34,3current coordinate 29,3 next coordinate:30,3
 dest coordinate 34,3current coordinate 30,3 next coordinate:31,3
 dest coordinate 34,3current coordinate 31,3 next coordinate:32,3
 dest coordinate 34,3current coordinate 32,3 next coordinate:33,3
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 33,3 next coordinate:34,3
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 34,3 next coordinate:35,3
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 35,3 next coordinate:35,4
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 35,4 next coordinate:35,5
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 35,5 next coordinate:35,6
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 35,6 next coordinate:35,7
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 35,7 next coordinate:35,8
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 35,8 next coordinate:35,9
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 35,9 next coordinate:35,10
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 35,10 next coordinate:35,11
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 35,11 next coordinate:35,12
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 35,12 next coordinate:34,12
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 34,12 next coordinate:34,11
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 34,11 next coordinate:34,10
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 34,10 next coordinate:34,9
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 34,9 next coordinate:34,8
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 34,8 next coordinate:34,7
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 34,7 next coordinate:34,6
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 34,6 next coordinate:34,5
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 34,5 next coordinate:33,5
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 33,5 next coordinate:32,5
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 32,5 next coordinate:31,5
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 31,5 next coordinate:30,5
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 30,5 next coordinate:29,5
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 29,5 next coordinate:29,6
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 29,6 next coordinate:29,7
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 29,7 next coordinate:29,8
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 29,8 next coordinate:30,8
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 30,8 next coordinate:31,8
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 31,8 next coordinate:31,9
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 31,9 next coordinate:31,10
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 31,10 next coordinate:31,11
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 31,11 next coordinate:31,12
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 31,12 next coordinate:31,13
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 31,13 next coordinate:31,14
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 31,14 next coordinate:31,15
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 31,15 next coordinate:31,16
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 31,16 next coordinate:31,17
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 31,17 next coordinate:31,18
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 31,18 next coordinate:32,18
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 32,18 next coordinate:33,18
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 33,18 next coordinate:34,18
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 34,18 next coordinate:35,18
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 35,18 next coordinate:36,18
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 36,18 next coordinate:37,18
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 37,18 next coordinate:38,18
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 38,18 next coordinate:39,18
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 39,18 next coordinate:40,18
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 40,18 next coordinate:40,17
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 40,17 next coordinate:40,16
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 40,16 next coordinate:40,15
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 40,15 next coordinate:40,14
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 40,14 next coordinate:40,13
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 40,13 next coordinate:40,12
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 40,12 next coordinate:40,11
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 40,11 next coordinate:40,10
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 40,10 next coordinate:40,9
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 40,9 next coordinate:39,9
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 39,9 next coordinate:38,9
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 38,9 next coordinate:37,9
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 37,9 next coordinate:37,8
-Now aim is PARCEL, DEST:37,7
 dest coordinate 37,7current coordinate 37,8 next coordinate:37,7
-Now aim is EXIT, FINISH is 35,1
 dest coordinate 35,1current coordinate 37,7 next coordinate:38,7
-Now aim is EXIT, FINISH is 35,1
 dest coordinate 35,1current coordinate 38,7 next coordinate:39,7
-Now aim is EXIT, FINISH is 35,1
 dest coordinate 35,1current coordinate 39,7 next coordinate:40,7
-Now aim is EXIT, FINISH is 35,1
 dest coordinate 35,1current coordinate 40,7 next coordinate:40,8
-Now aim is EXIT, FINISH is 35,1
 dest coordinate 35,1current coordinate 40,8 next coordinate:40,9
-Now aim is EXIT, FINISH is 35,1
 dest coordinate 35,1current coordinate 40,9 next coordinate:40,10
-Now aim is EXIT, FINISH is 35,1
 dest coordinate 35,1current coordinate 40,10 next coordinate:40,11
-Now aim is EXIT, FINISH is 35,1
 dest coordinate 35,1current coordinate 40,11 next coordinate:40,12
-Now aim is EXIT, FINISH is 35,1
 dest coordinate 35,1current coordinate 40,12 next coordinate:40,13
-Now aim is EXIT, FINISH is 35,1
 dest coordinate 35,1current coordinate 40,13 next coordinate:40,14
-Now aim is EXIT, FINISH is 35,1
 dest coordinate 35,1current coordinate 40,14 next coordinate:40,15
-Now aim is EXIT, FINISH is 35,1
 dest coordinate 35,1current coordinate 40,15 next coordinate:40,16
-Now aim is EXIT, FINISH is 35,1
 dest coordinate 35,1current coordinate 40,16 next coordinate:40,17
-Now aim is EXIT, FINISH is 35,1
 dest coordinate 35,1current coordinate 40,17 next coordinate:40,18
-Now aim is EXIT, FINISH is 33,1
 dest coordinate 33,1current coordinate 40,18 next coordinate:39,18
-Now aim is EXIT, FINISH is 33,1
 dest coordinate 33,1current coordinate 39,18 next coordinate:38,18
-Now aim is EXIT, FINISH is 33,1
 dest coordinate 33,1current coordinate 38,18 next coordinate:37,18
-Now aim is EXIT, FINISH is 33,1
 dest coordinate 33,1current coordinate 37,18 next coordinate:36,18
-Now aim is EXIT, FINISH is 33,1
 dest coordinate 33,1current coordinate 36,18 next coordinate:35,18
-Now aim is EXIT, FINISH is 33,1
 dest coordinate 33,1current coordinate 35,18 next coordinate:34,18
-Now aim is EXIT, FINISH is 33,1
 dest coordinate 33,1current coordinate 34,18 next coordinate:33,18
-Now aim is EXIT, FINISH is 33,1
 dest coordinate 33,1current coordinate 33,18 next coordinate:32,18
-Now aim is EXIT, FINISH is 33,1
 dest coordinate 33,1current coordinate 32,18 next coordinate:31,18
-Now aim is EXIT, FINISH is 33,1
 dest coordinate 33,1current coordinate 31,18 next coordinate:30,18
-Now aim is EXIT, FINISH is 33,1
 dest coordinate 33,1current coordinate 30,18 next coordinate:29,18
-Now aim is EXIT, FINISH is 33,1
 dest coordinate 33,1current coordinate 29,18 next coordinate:29,17
-Now aim is EXIT, FINISH is 33,1
 dest coordinate 33,1current coordinate 29,17 next coordinate:29,16
-Now aim is EXIT, FINISH is 33,1
 dest coordinate 33,1current coordinate 29,16 next coordinate:29,15
-Now aim is EXIT, FINISH is 33,1
 dest coordinate 33,1current coordinate 29,15 next coordinate:29,14
-Now aim is EXIT, FINISH is 33,1
 dest coordinate 33,1current coordinate 29,14 next coordinate:29,13
-Now aim is EXIT, FINISH is 33,1
 dest coordinate 33,1current coordinate 29,13 next coordinate:29,12
-Now aim is EXIT, FINISH is 33,1
 dest coordinate 33,1current coordinate 29,12 next coordinate:29,11
-Now aim is EXIT, FINISH is 33,1
 dest coordinate 33,1current coordinate 29,11 next coordinate:29,10
-Now aim is EXIT, FINISH is 33,1
 dest coordinate 33,1current coordinate 29,10 next coordinate:29,9
-Now aim is EXIT, FINISH is 33,1
 dest coordinate 33,1current coordinate 29,9 next coordinate:29,8
-Now aim is EXIT, FINISH is 33,1
 dest coordinate 33,1current coordinate 29,8 next coordinate:29,7
-Now aim is EXIT, FINISH is 33,1
 dest coordinate 33,1current coordinate 29,7 next coordinate:29,6
-Now aim is EXIT, FINISH is 33,1
 dest coordinate 33,1current coordinate 29,6 next coordinate:30,6
-Now aim is EXIT, FINISH is 33,1
 dest coordinate 33,1current coordinate 30,6 next coordinate:30,5
-Now aim is EXIT, FINISH is 33,1
 dest coordinate 33,1current coordinate 30,5 next coordinate:31,5
-Now aim is EXIT, FINISH is 33,1
 dest coordinate 33,1current coordinate 31,5 next coordinate:32,5
-Now aim is EXIT, FINISH is 33,1
 dest coordinate 33,1current coordinate 32,5 next coordinate:33,5
-Now aim is EXIT, FINISH is 33,1
 dest coordinate 33,1current coordinate 33,5 next coordinate:33,4
-Now aim is EXIT, FINISH is 33,1
 dest coordinate 33,1current coordinate 33,4 next coordinate:33,3
-Now aim is EXIT, FINISH is 33,1
 dest coordinate 33,1current coordinate 33,3 next coordinate:33,2
-Now aim is EXIT, FINISH is 33,1
 dest coordinate 33,1current coordinate 33,2 next coordinate:33,1
 dest coordinate 33,1current coordinate 33,1 next coordinate:33,1

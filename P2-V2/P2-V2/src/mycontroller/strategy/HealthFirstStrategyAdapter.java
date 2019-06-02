@@ -11,8 +11,6 @@ import utilities.Coordinate;
  */
 public class HealthFirstStrategyAdapter implements IStrategyAdapter{
 	protected AIM aim;
-	//protected Output output;
-	//protected volatile MyAutoController myAutoController;
 	protected Coordinate destCoordinate;
 	protected Node nextNode;
 	
@@ -24,27 +22,29 @@ public class HealthFirstStrategyAdapter implements IStrategyAdapter{
 		// go to FINISH tile after get enough parcels
 		if(controller.numParcelsFound() >= controller.numParcels()) {
 			aim = AIM.EXIT;
-			Coordinate coordinate = controller.getAnalyseMap().getNearestTileCoordinate("FINISH", controller.getPositionCoordinate(), controller.getAnalyseMap().getMazeHealthMode(), controller.getFindPathAlgorithm());
+			Coordinate coordinate = controller.getAnalyseMap().getNearestTileCoordinate("FINISH",
+				controller.getPositionCoordinate(), controller.getAnalyseMap().getMazeHealthMode(),
+				controller.getFindPathAlgorithm());
 			if (coordinate == null) {
-				//output.write("Now aim is EXIT, but FINISH doesn't be found, and no unupdated coordinate\n");
 				System.exit(1);
 			} else {
 				destCoordinate = coordinate;
-				//output.write("Now aim is EXIT, FINISH is " + destCoordinate.toString() + "\n");
 			}
 		} else {
 			// search parcel firstly
 			Coordinate coordinate = null;
-			coordinate = controller.getAnalyseMap().getNearestTileCoordinate("parcel", controller.getPositionCoordinate(), controller.getAnalyseMap().getMazeHealthMode(), controller.getFindPathAlgorithm());
+			coordinate = controller.getAnalyseMap().getNearestTileCoordinate("parcel", 
+				controller.getPositionCoordinate(), controller.getAnalyseMap().getMazeHealthMode(),
+				controller.getFindPathAlgorithm());
 			// no parcel detected, explore the maze
 			if (coordinate == null) {
 				aim = AIM.EXPLORE;
-				destCoordinate = controller.getAnalyseMap().getNearestUnupdatedCoordinate(controller.getPositionCoordinate(), controller.getAnalyseMap().getMazeHealthMode(), controller.getFindPathAlgorithm());
-				//output.write("Now aim is EXPLORE, DEST:" + destCoordinate.toString() + "\n");
+				destCoordinate = controller.getAnalyseMap().
+						getNearestUnupdatedCoordinate(controller.getPositionCoordinate(),
+						controller.getAnalyseMap().getMazeHealthMode(), controller.getFindPathAlgorithm());
 			} else {
 				aim = AIM.PARCEL;
 				destCoordinate = coordinate;
-				//output.write("Now aim is PARCEL, DEST:" + destCoordinate.toString() + "\n");
 			}
 		}
 		setNextNode(controller, controller.getAnalyseMap().getMazeHealthMode());
@@ -66,11 +66,12 @@ public class HealthFirstStrategyAdapter implements IStrategyAdapter{
 		} else if (aim == AIM.EXPLORE) {
 			// search parcel firstly
 			Coordinate coordinate = null;
-			coordinate = controller.getAnalyseMap().getNearestTileCoordinate("parcel", controller.getPositionCoordinate(), controller.getAnalyseMap().getMazeHealthMode(), controller.getFindPathAlgorithm());
+			coordinate = controller.getAnalyseMap().getNearestTileCoordinate("parcel", 
+				controller.getPositionCoordinate(), controller.getAnalyseMap().getMazeHealthMode(),
+				controller.getFindPathAlgorithm());
 			if (coordinate != null){
 				aim = AIM.PARCEL;
 				destCoordinate = coordinate;
-				//output.write("Now aim is PARCEL, DEST:" + destCoordinate.toString() + "\n");
 			}
 		} else if (aim == AIM.EXIT) {
 			initializeAim(controller);

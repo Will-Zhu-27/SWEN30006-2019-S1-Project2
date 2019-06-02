@@ -18,30 +18,28 @@ import world.WorldSpatial;
 import world.WorldSpatial.Direction;
 
 /**
- * 
+ * MyAutoController, it can support 2 modes: fuel, health
  * @author yuqiangz@student.unimelb.edu.au
  *
  */
 public class MyAutoController extends CarController {
 	// How many minimum units the wall is away from the player.
 	private int wallSensitivity = 1;
-	private Output output;
 	protected volatile AnalyseMap analyseMap;
 	private IStrategyAdapter strategy;
 	protected IFindPathAlgorithm findPathAlgorithm;
 	public MyAutoController(Car car) {
 		super(car);
-		output = new Output("record.txt");
+		// get corresponding strategy
 		strategy = StrategyFactory.getStrategyAdapter(Simulation.toConserve());
-		
+		// analyze the total map
 		analyseMap = new AnalyseMap(getMap(), mapWidth(), mapHeight());
+		// set find path algorithm
 		findPathAlgorithm = new AStar(analyseMap.mazeFuelMode);
 		// update Start point view
 		analyseMap.updateCarMap(getView());
 		// get first aim
 		strategy.initializeAim(this);
-		output.write("Dest: " + strategy.getDestCoordinate().toString() + "\n");
-		output.write("need find " + numParcels() + "\n");
 	}
 
 	@Override
@@ -51,10 +49,11 @@ public class MyAutoController extends CarController {
 		}
 		// Gets what the car can see
 		HashMap<Coordinate, MapTile> currentView = getView();
-		Coordinate currentCoordinate = getPositionCoordinate();
+		// update map with new traps info
 		analyseMap.updateCarMap(currentView);
-		
+		// update strategy
 		strategy.update(this);
+		
 		// make sure the car is moving
 		if (getSpeed() == 0) {
 			if (checkWallAhead(getOrientation(), currentView)) {
@@ -63,36 +62,24 @@ public class MyAutoController extends CarController {
 				applyForwardAcceleration();
 			}
 		}
-		Node next = strategy.getNextNode();
-		/*
-		if (next == null) {
-			findPathAlgorithm.setMaze(analyseMap.mazeFuelMode);
-			findPathAlgorithm.setStart(currentCoordinate);
-			findPathAlgorithm.setEnd(strategy.getDestCoordinate());
-			next = findPathAlgorithm.findPath();
-		}
-		*/
+		
 		// get Next Coordinate the car should arrive
-		// first node is currentCoordinate
+		Node next = strategy.getNextNode();
 		try {
-			//next = next.next;
 			Coordinate destCoordinate = new Coordinate(next.x, next.y);
-			output.write("dest coordinate " + strategy.getDestCoordinate().toString() + "current coordinate "
-					+ currentCoordinate.toString() + " next coordinate:" + destCoordinate.toString() + "\n");
-			moveHandler(currentCoordinate, getOrientation(), destCoordinate);
+			// move to given coordinate
+			moveHandler(getPositionCoordinate(), getOrientation(), destCoordinate);
 		} catch (Exception e) {
 			applyBrake();
 		}
 		
 	}
 	
-	public Coordinate getPositionCoordinate() {
-		String temp = getPosition();
-		int x = Integer.parseInt(temp.split(",")[0]);
-		int y = Integer.parseInt(temp.split(",")[1]);
-		return new Coordinate(x, y);
-	}
-	
+
+	/**
+	 * According to current position and given coordinate it should arrive now,
+	 * give corresponding operation
+	 */
 	public void moveHandler(Coordinate currentCoordinate, Direction direction, Coordinate destCoordinate) {
 		int diffX = destCoordinate.x - currentCoordinate.x;
 		int diffY = destCoordinate.y - currentCoordinate.y;
@@ -202,6 +189,13 @@ public class MyAutoController extends CarController {
 			}
 		}
 		return false;
+	}
+	
+	public Coordinate getPositionCoordinate() {
+		String temp = getPosition();
+		int x = Integer.parseInt(temp.split(",")[0]);
+		int y = Integer.parseInt(temp.split(",")[1]);
+		return new Coordinate(x, y);
 	}
 	
 	public boolean checkWest(HashMap<Coordinate,MapTile> currentView){

@@ -2,13 +2,12 @@ package mycontroller;
 import tiles.MapTile;
 
 /**
- * 
+ * store MapTile and record extra information
  * @author yuqiangz@student.unimelb.edu.au
  *
  */
 public class DetectTile {
 	protected MapTile tile;
-	protected int visitedTimes = 0;
 	protected String tileType = "null";
 	/**
 	 * true if this tile has been viewed by car.
@@ -25,14 +24,8 @@ public class DetectTile {
 		} else {
 			isUpdated = false;
 		}
-		visitedTimes = 0;	
 		this.x = x;
 		this.y = y;
-	}
-	
-	
-	public void visitTile() {
-		visitedTimes++;
 	}
 	
 	public void setTileType(String tileType) {

@@ -5,7 +5,8 @@ import java.util.List;
 
 import utilities.Coordinate;
  /**
-  * A* algorithm to get shortest path
+  * A* algorithm to get shortest path, part code of this class refers to online
+  * source.
   * @author yuqiangz@student.unimelb.edu.au
   *
   */
@@ -161,62 +162,6 @@ public class AStar implements IFindPathAlgorithm {
         int step = Math.abs(node.x - end.x) + Math.abs(node.y - end.y);
         return step * STEP;
     }
- 
-    /*
-    public static void main(String[] args) {
-    	int[][] NODES = { 
-    			{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-    			{1,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1},
-    			{1,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1},
-    			{1,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1},
-    			{1,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1},
-    			{1,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1},
-    			{1,1,0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,1},
-    			{1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    			{1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    			{1,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1},
-    			{1,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1},
-    			{1,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1},
-    			{1,1,0,0,0,0,1,0,0,0,0,0,1,0,0,1,1,1,1,1},
-    			{1,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1},
-    			{1,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1},
-    			{1,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1},
-    			{1,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1},
-    			{1,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1},
-    			{1,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,1},
-    			{1,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-    			{1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    			{1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    			{1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    			{1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-    			{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
-    	    };
-    	AStar findPathAlgorithm = new AStar(NODES);
-    	findPathAlgorithm.setStart(2, 2);
-    	findPathAlgorithm.setEnd(2, 5);
-    	Node parent = findPathAlgorithm.findPath();
-    	//System.out.println(parent.getDistance());
-    	ArrayList<AStarNode> arrayList = new ArrayList<AStarNode>();
-    	while (parent != null) {
-            // System.out.println(parent.x + ", " + parent.y);
-            arrayList.add(new AStarNode(parent.x, parent.y));
-            System.out.println("(" + parent.x + "," + parent.y + ")");
-            parent = parent.next;
-        }
-    	for (int i = 0; i < NODES.length; i++) {
-            for (int j = 0; j < NODES[0].length; j++) {
-                if (exists(arrayList, i, j)) {
-                    System.out.print("@, ");
-                } else {
-                    System.out.print(NODES[i][j] + ", ");
-                }
- 
-            }
-            System.out.println();
-        }
- 
-    }
-    */
  
     public static Node find(List<AStarNode> nodes, AStarNode point) {
         for (AStarNode n : nodes)

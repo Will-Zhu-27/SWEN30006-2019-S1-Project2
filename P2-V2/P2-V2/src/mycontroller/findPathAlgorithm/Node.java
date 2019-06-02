@@ -1,7 +1,7 @@
 package mycontroller.findPathAlgorithm;
 
 /**
- * 
+ * the link list to store path information
  * @author yuqiangz@student.unimelb.edu.au
  *
  */
@@ -15,9 +15,14 @@ public class Node {
 		this.y = y;
 	}
 
-	// next Node
+	/**
+	 *  next Node
+	 */
 	public Node next = null;
 
+	/**
+	 * get distance from this node to the end.
+	 */
 	public int getDistance() {
 		int distance = 0;
 		Node tempNode = this.next;
