@@ -1,20 +1,18 @@
 package mycontroller;
 
 import controller.CarController;
-import mycontroller.Strategy.AIM;
 import mycontroller.findPathAlgorithm.AStar;
-import mycontroller.findPathAlgorithm.AStar.Node;
+import mycontroller.findPathAlgorithm.IFindPathAlgorithm;
+import mycontroller.findPathAlgorithm.Node;
+import mycontroller.strategy.IStrategyAdapter;
+import mycontroller.strategy.StrategyFactory;
+import mycontroller.strategy.IStrategyAdapter.AIM;
 import swen30006.driving.Simulation;
 import world.Car;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
-
-import com.badlogic.gdx.Input;
 
 import tiles.MapTile;
-import tiles.MapTile.Type;
 import utilities.Coordinate;
 import world.WorldSpatial;
 import world.WorldSpatial.Direction;
@@ -27,128 +25,28 @@ import world.WorldSpatial.Direction;
 public class MyAutoController extends CarController {
 	// How many minimum units the wall is away from the player.
 	private int wallSensitivity = 1;
-	// Car Speed to move at
-	private final int CAR_MAX_SPEED = 1;
 	private Output output;
 	protected volatile AnalyseMap analyseMap;
-	private Strategy strategy;
-	private AStar findPathAlgorithm;
+	private IStrategyAdapter strategy;
+	protected IFindPathAlgorithm findPathAlgorithm;
 	public MyAutoController(Car car) {
 		super(car);
 		output = new Output("record.txt");
-		strategy = new Strategy(this, output);
+		strategy = StrategyFactory.getStrategyAdapter(Simulation.toConserve());
 		
 		analyseMap = new AnalyseMap(getMap(), mapWidth(), mapHeight());
 		findPathAlgorithm = new AStar(analyseMap.mazeFuelMode);
 		// update Start point view
 		analyseMap.updateCarMap(getView());
 		// get first aim
-		strategy.initializeAim();
-		output.write("Dest: " + strategy.destCoordinate.toString() + "\n");
+		strategy.initializeAim(this);
+		output.write("Dest: " + strategy.getDestCoordinate().toString() + "\n");
 		output.write("need find " + numParcels() + "\n");
-		/*
-		findPathAlgorithm.setStart(16,  14);
-		findPathAlgorithm.setEnd(22, 16);
-		Node parent = findPathAlgorithm.findPath();
-		output.write("from (16, 14) to (22, 16)\n");
-    	while (parent != null) {
-            output.write("(" + parent.x + "," + parent.y + ")\n");
-            parent = parent.next;
-        }
-    	output.write("******end******\n");
-		String graph = ""; 
-		for (int x = 0; x < mapWidth(); x++) {
-			for (int y = 0; y < mapHeight(); y++) {
-				Coordinate coordinate = new Coordinate(x, y);
-				DetectTile detectTile = analyseMap.carMap.get(coordinate);
-				if (y == 0) {
-					graph += "{";
-				}
-				if (detectTile.tileType.equals("WALL")) {
-					graph += "1,"; 
-				} else {
-					graph += "0,"; 
-				}
-				if (y == mapHeight() - 1) {
-					graph += "},\n";
-				}
-			}
-		}
-		output.write(graph);
-		*/
-		 
-		/*
-		Coordinate coordinate = analyseMap.getNearestTileCoordinate("health", getPositionCoordinate());
-		if (coordinate != null) {
-			output.write("find nearest health:" + coordinate.toString() + "\n");
-		}
-		*/
-		/*
-		// try to use AStar
-		findPathAlgorithm.setStart(2, 3);
-		findPathAlgorithm.setEnd(10, 3);
-		Node next = findPathAlgorithm.findPath();
-		
-		ArrayList<Node> arrayList = new ArrayList<Node>();
-    	while (next != null) {
-    		arrayList.add(new Node(next.x, next.y));
-            String path = "(" + next.x + "," + next.y + ")\n";
-            output.write(path);
-            next = next.next;
-        }
-    	output.write("**********end**********\n");
-    	
-    	for (int y = mapHeight() - 1; y >= 0; y--) {
-    		String temp = "";
-            for (int x = 0; x < mapWidth(); x++) {            	
-                if (AStar.exists(arrayList, x, y)) {
-                    temp += "@";
-                } else {
-                    
-                    temp += analyseMap.maze[x][y];
-                }
-            }
-            temp += "\n";
-            output.write(temp);
-        }
-        */
-		//output.write(analyseMap.getMazeGraphString());
-		/*
-		String coordinateString = getPosition();
-		int x = Integer.parseInt(coordinateString.split(",")[0]);
-		int y = Integer.parseInt(coordinateString.split(",")[1]);
-		Coordinate co = new Coordinate(x, y);
-		*/
-		//analyseMap.updateCarMap(getView());
-		//output.write(analyseMap.getcarMapString());
-		//output.write(analyseMap.getNearestUnupdatedCoordinate(co, getViewSquare()).toString());
-		//output.write(Simulation.toConserve().name());
-		/*
-		HashMap<Coordinate,MapTile> view = getView();
-		for (Coordinate coordinate : view.keySet()) {
-			String data = "";
-			data += coordinate.x + "," + coordinate.y;
-			MapTile tile = view.get(coordinate);
-			data += ": " + tile.getType().name() + "\n";
-			
-			output.write(data);
-		}
-		
-		HashMap<Coordinate,MapTile> view = getMap();
-		for (Coordinate coordinate : view.keySet()) {
-			String data = "";
-			data += coordinate.x + "," + coordinate.y;
-			MapTile tile = view.get(coordinate);
-			data += ": " + tile.getType().name() + "\n";
-			output.write(data);
-		}
-		output.endOutput();
-		*/
 	}
 
 	@Override
 	public void update() {
-		if (strategy.aim == AIM.WAITTING) {
+		if (strategy.getAim() == AIM.WAITTING) {
 			return;
 		}
 		// Gets what the car can see
@@ -156,7 +54,7 @@ public class MyAutoController extends CarController {
 		Coordinate currentCoordinate = getPositionCoordinate();
 		analyseMap.updateCarMap(currentView);
 		
-		strategy.update();
+		strategy.update(this);
 		// make sure the car is moving
 		if (getSpeed() == 0) {
 			if (checkWallAhead(getOrientation(), currentView)) {
@@ -165,22 +63,21 @@ public class MyAutoController extends CarController {
 				applyForwardAcceleration();
 			}
 		}
-		findPathAlgorithm.resetMaze(analyseMap.mazeHealthMode);
-		findPathAlgorithm.setStart(currentCoordinate);
-		findPathAlgorithm.setEnd(strategy.destCoordinate);
-		Node next = findPathAlgorithm.findPath();
+		Node next = strategy.getNextNode();
+		/*
 		if (next == null) {
-			findPathAlgorithm.resetMaze(analyseMap.mazeFuelMode);
+			findPathAlgorithm.setMaze(analyseMap.mazeFuelMode);
 			findPathAlgorithm.setStart(currentCoordinate);
-			findPathAlgorithm.setEnd(strategy.destCoordinate);
+			findPathAlgorithm.setEnd(strategy.getDestCoordinate());
 			next = findPathAlgorithm.findPath();
 		}
+		*/
 		// get Next Coordinate the car should arrive
 		// first node is currentCoordinate
 		try {
-			next = next.next;
+			//next = next.next;
 			Coordinate destCoordinate = new Coordinate(next.x, next.y);
-			output.write("dest coordinate " + strategy.destCoordinate.toString() + "current coordinate "
+			output.write("dest coordinate " + strategy.getDestCoordinate().toString() + "current coordinate "
 					+ currentCoordinate.toString() + " next coordinate:" + destCoordinate.toString() + "\n");
 			moveHandler(currentCoordinate, getOrientation(), destCoordinate);
 		} catch (Exception e) {
@@ -288,28 +185,6 @@ public class MyAutoController extends CarController {
 	}
 	
 	/**
-	 * Check if the wall is on your left hand side given your orientation
-	 * @param orientation
-	 * @param currentView
-	 * @return
-	 */
-	private boolean checkFollowingWall(WorldSpatial.Direction orientation, HashMap<Coordinate, MapTile> currentView) {
-		
-		switch(orientation){
-		case EAST:
-			return checkNorth(currentView);
-		case NORTH:
-			return checkWest(currentView);
-		case SOUTH:
-			return checkEast(currentView);
-		case WEST:
-			return checkSouth(currentView);
-		default:
-			return false;
-		}	
-	}
-	
-	/**
 	 * Method below just iterates through the list and check in the correct coordinates.
 	 * i.e. Given your current position is 10,10
 	 * checkEast will check up to wallSensitivity amount of tiles to the right.
@@ -365,4 +240,11 @@ public class MyAutoController extends CarController {
 		return false;
 	}
 	
+	public IFindPathAlgorithm getFindPathAlgorithm() {
+		return findPathAlgorithm;
+	}
+	
+	public AnalyseMap getAnalyseMap() {
+		return analyseMap;
+	}
 }

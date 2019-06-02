@@ -24,4 +24,15 @@ Strategy:
 distance计算时用findPathRoad
 发现parcel时，无论如何都会设为第一目标进行拾取
 把lava当作墙的health mode：
-    1. EXPLORE时：
+
+
+当health低于一定值时，应以health为第一目标！暂缓这个
+
+记录：RunSpeed=4
+fuel模式： hard-map:  health reduce:305, fuel reduce:120
+        medium-map:  health reduce: 50, fuel reduce: 115
+        easy-map: health reduce: 30, fuel reduce: 79
+
+health模式： hard-map:  health reduce:79.95, fuel reduce:164
+        medium-map:  health reduce: 39.95, fuel reduce: 116
+        easy-map: health reduce: 25, fuel reduce: 80

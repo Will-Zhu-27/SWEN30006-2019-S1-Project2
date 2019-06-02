@@ -1,6 +1,5 @@
 package mycontroller;
 import tiles.MapTile;
-import tiles.MapTile.Type;
 
 /**
  * 
@@ -11,6 +10,9 @@ public class DetectTile {
 	protected MapTile tile;
 	protected int visitedTimes = 0;
 	protected String tileType = "null";
+	/**
+	 * true if this tile has been viewed by car.
+	 */
 	protected boolean isUpdated;
 	protected int x;
 	protected int y;

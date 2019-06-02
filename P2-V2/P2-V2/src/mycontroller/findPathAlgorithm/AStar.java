@@ -4,17 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import utilities.Coordinate;
+ /**
+  * A* algorithm to get shortest path
+  * @author yuqiangz@student.unimelb.edu.au
+  *
+  */
+public class AStar implements IFindPathAlgorithm {
  
-public class AStar {
- 
-    public static int[][] NODES;
-    public static int xRange;
-    public static int yRange;
+    private static int[][] NODES;
+    private static int xRange;
+    private static int yRange;
  
     public static final int STEP = 1;
  
-    private ArrayList<Node> openList;
-    private ArrayList<Node> closeList;
+    private ArrayList<AStarNode> openList;
+    private ArrayList<AStarNode> closeList;
     
     private Node start;
     private Node end;
@@ -30,31 +34,31 @@ public class AStar {
     	
     }
     
-    public void resetMaze(int maze[][]) {
+    public void setMaze(int maze[][]) {
     	NODES = maze;
     	xRange = NODES.length;
     	yRange = NODES[0].length;
     }
     
     public void setStart(int x, int y) {
-    	start = new Node(x, y);
+    	start = new AStarNode(x, y);
     }
     
     public void setStart(Coordinate coordinate) {
-    	start = new Node(coordinate.x, coordinate.y);
+    	start = new AStarNode(coordinate.x, coordinate.y);
     }
     
     public void setEnd(int x, int y) {
-    	end = new Node(x, y);
+    	end = new AStarNode(x, y);
     }
     
     public void setEnd(Coordinate coordinate) {
-    	end = new Node(coordinate.x, coordinate.y);
+    	end = new AStarNode(coordinate.x, coordinate.y);
     }
  
-    public Node findMinFNodeInOpneList() {
-        Node tempNode = openList.get(0);
-        for (Node node : openList) {
+    public AStarNode findMinFNodeInOpneList() {
+    	AStarNode tempNode = openList.get(0);
+        for (AStarNode node : openList) {
             if (node.F < tempNode.F) {
                 tempNode = node;
             }
@@ -62,28 +66,28 @@ public class AStar {
         return tempNode;
     }
  
-    public ArrayList<Node> findNeighborNodes(Node currentNode) {
-        ArrayList<Node> arrayList = new ArrayList<Node>();
+    public ArrayList<AStarNode> findNeighborNodes(AStarNode currentNode) {
+        ArrayList<AStarNode> arrayList = new ArrayList<AStarNode>();
         
         int topX = currentNode.x;
         int topY = currentNode.y - 1;
         if (canReach(topX, topY) && !exists(closeList, topX, topY)) {
-            arrayList.add(new Node(topX, topY));
+            arrayList.add(new AStarNode(topX, topY));
         }
         int bottomX = currentNode.x;
         int bottomY = currentNode.y + 1;
         if (canReach(bottomX, bottomY) && !exists(closeList, bottomX, bottomY)) {
-            arrayList.add(new Node(bottomX, bottomY));
+            arrayList.add(new AStarNode(bottomX, bottomY));
         }
         int leftX = currentNode.x - 1;
         int leftY = currentNode.y;
         if (canReach(leftX, leftY) && !exists(closeList, leftX, leftY)) {
-            arrayList.add(new Node(leftX, leftY));
+            arrayList.add(new AStarNode(leftX, leftY));
         }
         int rightX = currentNode.x + 1;
         int rightY = currentNode.y;
         if (canReach(rightX, rightY) && !exists(closeList, rightX, rightY)) {
-            arrayList.add(new Node(rightX, rightY));
+            arrayList.add(new AStarNode(rightX, rightY));
         }
         return arrayList;
     }
@@ -101,36 +105,36 @@ public class AStar {
      * node and end node is same; 
      */
     public Node findPath() {
-    	openList = new ArrayList<Node>();
-        closeList = new ArrayList<Node>();
+    	openList = new ArrayList<AStarNode>();
+        closeList = new ArrayList<AStarNode>();
 
-        openList.add(end);
+        openList.add((AStarNode)end);
  
         while (openList.size() > 0) {
 
-            Node currentNode = findMinFNodeInOpneList();
+        	AStarNode currentNode = findMinFNodeInOpneList();
 
             openList.remove(currentNode);
 
             closeList.add(currentNode);
  
-            ArrayList<Node> neighborNodes = findNeighborNodes(currentNode);
-            for (Node node : neighborNodes) {
+            ArrayList<AStarNode> neighborNodes = findNeighborNodes(currentNode);
+            for (AStarNode node : neighborNodes) {
                 if (exists(openList, node)) {
                     foundPoint(currentNode, node);
                 } else {
-                    notFoundPoint(currentNode, start, node);
+                    notFoundPoint(currentNode, (AStarNode)start, node);
                 }
             }
-            if (find(openList, start) != null) {
-                return find(openList, start);
+            if (find(openList, (AStarNode)start) != null) {
+                return find(openList, (AStarNode)start);
             }
         }
  
-        return find(openList, start);
+        return find(openList, (AStarNode)start);
     }
  
-    private void foundPoint(Node tempStart, Node node) {
+    private void foundPoint(AStarNode tempStart, AStarNode node) {
         int G = calcG(tempStart, node);
         if (G < node.G) {
             node.next = tempStart;
@@ -139,7 +143,7 @@ public class AStar {
         }
     }
  
-    private void notFoundPoint(Node tempStart, Node end, Node node) {
+    private void notFoundPoint(AStarNode tempStart, AStarNode end, AStarNode node) {
         node.next = tempStart;
         node.G = calcG(tempStart, node);
         node.H = calcH(end, node);
@@ -147,9 +151,9 @@ public class AStar {
         openList.add(node);
     }
  
-    private int calcG(Node start, Node node) {
+    private int calcG(AStarNode start, AStarNode node) {
         int G = STEP;
-        int parentG = node.next != null ? node.next.G : 0;
+        int parentG = node.next != null ? ((AStarNode)(node.next)).G : 0;
         return G + parentG;
     }
  
@@ -158,6 +162,7 @@ public class AStar {
         return step * STEP;
     }
  
+    /*
     public static void main(String[] args) {
     	int[][] NODES = { 
     			{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
@@ -188,13 +193,13 @@ public class AStar {
     	    };
     	AStar findPathAlgorithm = new AStar(NODES);
     	findPathAlgorithm.setStart(2, 2);
-    	findPathAlgorithm.setEnd(1, 7);
+    	findPathAlgorithm.setEnd(2, 5);
     	Node parent = findPathAlgorithm.findPath();
     	//System.out.println(parent.getDistance());
-    	ArrayList<Node> arrayList = new ArrayList<Node>();
+    	ArrayList<AStarNode> arrayList = new ArrayList<AStarNode>();
     	while (parent != null) {
             // System.out.println(parent.x + ", " + parent.y);
-            arrayList.add(new Node(parent.x, parent.y));
+            arrayList.add(new AStarNode(parent.x, parent.y));
             System.out.println("(" + parent.x + "," + parent.y + ")");
             parent = parent.next;
         }
@@ -211,16 +216,17 @@ public class AStar {
         }
  
     }
+    */
  
-    public static Node find(List<Node> nodes, Node point) {
-        for (Node n : nodes)
+    public static Node find(List<AStarNode> nodes, AStarNode point) {
+        for (AStarNode n : nodes)
             if ((n.x == point.x) && (n.y == point.y)) {
                 return n;
             }
         return null;
     }
  
-    public static boolean exists(List<Node> nodes, Node node) {
+    public static boolean exists(List<AStarNode> nodes, AStarNode node) {
         for (Node n : nodes) {
             if ((n.x == node.x) && (n.y == node.y)) {
                 return true;
@@ -229,7 +235,7 @@ public class AStar {
         return false;
     }
  
-    public static boolean exists(List<Node> nodes, int x, int y) {
+    public static boolean exists(List<AStarNode> nodes, int x, int y) {
         for (Node n : nodes) {
             if ((n.x == x) && (n.y == y)) {
                 return true;
@@ -237,39 +243,19 @@ public class AStar {
         }
         return false;
     }
- 
-    public static class Node {
-        public Node(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
- 
-        public int x;
-        public int y;
- 
-        public int F;
+    
+    public static class AStarNode extends Node {
+    	public int F;
         public int G;
         public int H;
  
+        public AStarNode(int x, int y) {
+			super(x, y);
+			// TODO Auto-generated constructor stub
+		}
+ 
         public void calcF() {
             this.F = this.G + this.H;
-        }
- 
-        // next Node
-        public Node next = null;
-        
-        public int getDistance() {
-        	int distance = 0;
-        	Node tempNode = this.next;
-        	while(tempNode != null) {
-        		distance++;
-        		if (tempNode.next != null) {
-        			tempNode = tempNode.next;
-        		} else {
-        			break;
-        		}
-        	}
-        	return distance;
         }
     }
 }
