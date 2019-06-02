@@ -59,7 +59,7 @@ public class HealthFirstStrategyAdapter implements IStrategyAdapter{
 			if (aim != AIM.EXIT) {
 				initializeAim(controller);
 			} else {
-				aim = AIM.WAITTING;
+				aim = AIM.WAITING;
 				controller.applyBrake();
 				return;
 			}

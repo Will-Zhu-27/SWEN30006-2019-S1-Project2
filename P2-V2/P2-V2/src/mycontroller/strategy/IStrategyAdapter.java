@@ -5,7 +5,7 @@ import mycontroller.findPathAlgorithm.Node;
 import utilities.Coordinate;
 
 public interface IStrategyAdapter {
-	public enum AIM {EXPLORE, EXIT, PARCEL, HEALTH, WAITTING};
+	public enum AIM {EXPLORE, EXIT, PARCEL, HEALTH, WAITING};
 	/**
 	 * initialize the aim and set destCoordinate
 	 * @param controller

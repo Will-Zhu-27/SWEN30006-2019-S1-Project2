@@ -44,7 +44,7 @@ public class MyAutoController extends CarController {
 
 	@Override
 	public void update() {
-		if (strategy.getAim() == AIM.WAITTING) {
+		if (strategy.getAim() == AIM.WAITING) {
 			return;
 		}
 		// Gets what the car can see

@@ -72,7 +72,7 @@ public class FuelFirstStrategyAdapter implements IStrategyAdapter{
 			if (aim != AIM.EXIT) {
 				initializeAim(controller);
 			} else {
-				aim = AIM.WAITTING;
+				aim = AIM.WAITING;
 				controller.applyBrake();
 				return;
 			}
